@@ -1,0 +1,24 @@
+.saved-news {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 equal columns */
+    gap: 16px;
+    width: 100%;
+    padding: 102px 62px;
+    margin: 0;
+    background-color: #fff;
+    color: white;
+    justify-items: start; /* Ensures items align to the left in the last row */
+  }
+  
+  @media screen and (max-width: 768px) {
+    .saved-news {
+      padding: 32px 40px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .saved-news {
+      padding: 24px 16px 12px;
+    }
+  }
