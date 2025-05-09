@@ -1,12 +1,17 @@
-import React from 'react'
+import React from 'react';
+import Header from './Components/Header/Header';
+import Main from './Components/Main/Main';
+import Footer from './Components/Footer/Footer';
+import './styles/index.css';; // assuming global styles like normalize and fonts are here
 
 const App = () => {
   return (
-    <div>
-      <h1>News Explorer</h1>
-      <p>Welcome to the News Explorer App!</p>
-    </div>
-  )
-}
+    <>
+      <Header />
+      <Main />
+      <Footer />
+    </>
+  );
+};
 
-export default App
+export default App;

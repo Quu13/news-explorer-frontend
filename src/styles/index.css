@@ -1,0 +1,18 @@
+@import '../vendor/normalize.css';
+@import '../vendor/fonts.css';
+
+/* 3. Global base styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  background-color: #fff;
+  color: #000;
+}
