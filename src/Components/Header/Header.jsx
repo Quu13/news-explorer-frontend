@@ -8,7 +8,6 @@ function Header() {
       <nav className="header__nav">
         <div className="header__links">
           <a href="#" className="header__link">Home</a>
-          <a href="#" className="header__link">About</a>
         </div>
         <div className="header__buttons">
           <button className="header__button">Sign In</button>
