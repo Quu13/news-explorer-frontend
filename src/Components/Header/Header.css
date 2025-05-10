@@ -6,20 +6,61 @@
   max-width: 1440px;
   margin: 0 auto;
   box-sizing: border-box;
-   border-bottom: 1px solid rgba(196, 196, 196, 0.3);
+  border-bottom: 1px solid rgba(196, 196, 196, 0.3);
+  font-family: 'Roboto', sans-serif;
 }
 
-  .header__nav {
-    display: flex;
-    gap: 24px; /* adjust as needed based on the image */
-    align-items: center;
-  }
-  
-  .header__link,
-  .header__button {
-    font-size: 16px;
-    text-decoration: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
+/* Logo styling */
+.header__logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1A1B22;
+  text-decoration: none;
+}
+
+/* Nav container */
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 40px; /* space between links and buttons */
+}
+
+/* Link group */
+.header__links {
+  display: flex;
+  gap: 24px;
+}
+
+/* Button group */
+.header__buttons {
+  display: flex;
+  gap: 24px;
+}
+
+/* Link style */
+.header__link {
+  font-size: 16px;
+  font-weight: 400;
+  color: #1A1B22;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Sign-in button style */
+.header__button {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 22px;
+  border: 1px solid #1A1B22;
+  border-radius: 100px;
+  background: transparent;
+  color: #1A1B22;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.header__button:hover {
+  background-color: rgba(26, 27, 34, 0.05);
+}

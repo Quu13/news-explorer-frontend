@@ -1,13 +1,18 @@
-import React from 'react';
-import './Header.css'; // if using separate CSS
+import React from "react";
+import "./Header.css";
 
 function Header() {
   return (
     <header className="header">
-      <div className="header__logo">NewsExplorer</div>
+      <a href="/" className="header__logo">NewsExplorer</a>
       <nav className="header__nav">
-        <a href="/" className="header__link">Home</a>
-        <button className="header__button">Sign in</button>
+        <div className="header__links">
+          <a href="#" className="header__link">Home</a>
+          <a href="#" className="header__link">About</a>
+        </div>
+        <div className="header__buttons">
+          <button className="header__button">Sign In</button>
+        </div>
       </nav>
     </header>
   );
