@@ -33,8 +33,6 @@ const App = () => {
       if (response.token) {
         localStorage.setItem("token", response.token);
         handleCheckToken();
-        // setCurrentUser({ name, email, _id });
-        // setIsLoggedIn(true);
       }
     } catch (err) {
       console.error(err);
@@ -68,7 +66,6 @@ const App = () => {
 
   const fetchArticles = async () => {
     const articles = await getArticles();
-    // localStorage.setItem("savedArticles", articles);
     setSavedArticles(articles);
   };
 
@@ -80,7 +77,6 @@ const App = () => {
         article,
         savedArticles,
       });
-
       setSavedArticles(updatedArticles);
     } catch (err) {
       console.error("Error saving article:", err);
@@ -96,10 +92,8 @@ const App = () => {
 
   const handleSearch = async (keyword) => {
     setIsLoading(true);
-
     try {
       const articleData = await getNews(keyword);
-      ("");
 
       const articleObj = articleData.map((article) => ({
         _id: crypto.randomUUID(),
@@ -146,28 +140,31 @@ const App = () => {
     <div className="app">
       <UserContext.Provider value={{ currentUser, isLoggedIn }}>
         <div className="page">
-          <Header
-            handleOpenLoginModal={handleOpenLoginModal}
-            handleOpenRegisterModal={handleOpenRegisterModal}
-            handleSearch={handleSearch}
-            handleDrawerOpen={handleDrawerOpen}
-            handleOnLoggout={handleLoggout}
-            savedArticles={savedArticles}
-          />
-          <Outlet
-            context={{
-              visibleArticles,
-              newsArticles,
-              savedArticles,
-              handleCardRender,
-              isLoading,
-              hasSearched,
-              handleSaveArticle,
-            }}
-          />
-          <About /> 
+          <div className="hero-background">
+            <Header
+              handleOpenLoginModal={handleOpenLoginModal}
+              handleOpenRegisterModal={handleOpenRegisterModal}
+              handleSearch={handleSearch}
+              handleDrawerOpen={handleDrawerOpen}
+              handleOnLoggout={handleLoggout}
+              savedArticles={savedArticles}
+            />
+            <Outlet
+              context={{
+                visibleArticles,
+                newsArticles,
+                savedArticles,
+                handleCardRender,
+                isLoading,
+                hasSearched,
+                handleSaveArticle,
+              }}
+            />
+          </div>
+          <About />
           <Footer />
         </div>
+
         {activeModal === "drawer" && (
           <Drawer
             handleCloseModal={handleCloseModal}
@@ -201,3 +198,4 @@ const App = () => {
 };
 
 export default App;
+
