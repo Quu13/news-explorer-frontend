@@ -2,18 +2,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 104px;
-  max-width: 1440px;
+  padding: 0 104px;
+  min-height: 80px; /* or height: 80px; */
   box-sizing: border-box;
+  max-width: 1440px;
+  width: 100%;
   border-bottom: 1px solid rgba(196, 196, 196, 0.3);
   font-family: 'Roboto', sans-serif;
 }
 
+
 /* Logo styling */
 .header__logo {
+  font-family: 'Roboto Slab', serif;
   font-size: 20px;
   font-weight: 700;
-  color: #1A1B22;
+  color: #FFFFFF;
   text-decoration: none;
 }
 
@@ -21,41 +25,41 @@
 .header__nav {
   display: flex;
   align-items: center;
-  gap: 40px; /* space between links and buttons */
+  gap: 40px;
 }
 
 /* Link group */
 .header__links {
   display: flex;
   gap: 24px;
+  font-family: 'Roboto Slab', serif;
 }
 
 /* Button group */
 .header__buttons {
   display: flex;
   gap: 24px;
+  font-family: 'Roboto Slab', serif;
 }
 
-/* Link style */
 .header__link {
   font-size: 16px;
   font-weight: 400;
-  color: #1A1B22;
+  color: #FFFFFF;
   text-decoration: none;
   background: none;
   border: none;
   cursor: pointer;
 }
 
-/* Sign-in button style */
 .header__button {
   font-size: 16px;
   font-weight: 500;
   padding: 8px 22px;
-  border: 1px solid #1A1B22;
+  border: 1px solid #FFFFFF;
   border-radius: 100px;
   background: transparent;
-  color: #1A1B22;
+  color: #FFFFFF;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
