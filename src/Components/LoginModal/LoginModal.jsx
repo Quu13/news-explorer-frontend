@@ -12,14 +12,14 @@ const LoginModal = ({
 }) => {
   const { values, handleChange } = useForm({});
 
+  const isDisabled = !values.email || !values.password;
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const { email, password } = values;
 
-    if (!email || !password) {
-      return;
-    }
+    if (isDisabled) return;
 
     onSubmit({ email, password });
     onClose();
@@ -33,6 +33,7 @@ const LoginModal = ({
       onSecondaryBtnClick={onSecondaryBtnClick}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isDisabled={isDisabled} // <-- pass it here
     >
       <label htmlFor="email" className="modal__label">
         Email
