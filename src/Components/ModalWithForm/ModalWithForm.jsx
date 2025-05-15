@@ -27,10 +27,18 @@ const ModalWithForm = ({
     };
   }, []);
 
+  const handleOverlayClick = () => {
+    onClose(); // Closes the modal
+  };
+
+  const handleContentClick = (e) => {
+    e.stopPropagation(); // Prevents closing when clicking inside the modal
+  };
+
   return (
-  <div className="modal">
-    <button className="modal__close" onClick={onClose}></button> {/* This is now outside */}
-    <div className="modal__container">
+  <div className="modal" onClick={handleOverlayClick}>
+   <div className="modal__container" onClick={handleContentClick}>
+      <button className="modal__close" onClick={onClose}></button>
       <h3 className="modal__title">{title}</h3>
       <form className="modal__form" onSubmit={onSubmit}>
         {children}

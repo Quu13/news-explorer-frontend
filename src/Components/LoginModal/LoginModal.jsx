@@ -10,17 +10,18 @@ const LoginModal = ({
   onClose,
   onSubmit,
 }) => {
-  const { values, handleChange } = useForm({});
+  const { values, handleChange, errors, isValid } = useForm({
+    email: "",
+    password: "",
+  });
 
-  const isDisabled = !values.email || !values.password;
+  const isDisabled = !isValid;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const { email, password } = values;
-
     if (isDisabled) return;
 
+    const { email, password } = values;
     onSubmit({ email, password });
     onClose();
   };
@@ -33,7 +34,7 @@ const LoginModal = ({
       onSecondaryBtnClick={onSecondaryBtnClick}
       onClose={onClose}
       onSubmit={handleSubmit}
-      isDisabled={isDisabled} // <-- pass it here
+      isDisabled={isDisabled}
     >
       <label htmlFor="email" className="modal__label">
         Email
@@ -43,12 +44,11 @@ const LoginModal = ({
         type="email"
         name="email"
         id="email"
-        value={values.email || ""}
+        value={values.email}
         onChange={handleChange}
-        minLength="2"
-        maxLength="100"
         placeholder="Enter email"
       />
+      {errors.email && <span className="modal__error">{errors.email}</span>}
 
       <label htmlFor="password" className="modal__label">
         Password
@@ -58,12 +58,13 @@ const LoginModal = ({
         type="password"
         name="password"
         id="password"
-        value={values.password || ""}
+        value={values.password}
         onChange={handleChange}
-        minLength="2"
-        maxLength="100"
         placeholder="Enter password"
       />
+      {errors.password && (
+        <span className="modal__error">{errors.password}</span>
+      )}
     </ModalWithForm>
   );
 };
