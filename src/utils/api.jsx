@@ -1,7 +1,10 @@
+import { saveArticle, removeArticle } from './localStorage';
+
 const articles = [
     {
       isSaved: true,
       title: "Breaking News: Tech Innovation in 2024",
+      url: "https://example.com/tech-innovation-2024", 
       urlToImage: "https://via.placeholder.com/300",
       keyword: "Technology",
       content:
@@ -12,6 +15,7 @@ const articles = [
     {
       isSaved: true,
       title: "Finance: Stock Market Hits Record Highs",
+      url: "https://example.com/stock-market-highs", 
       urlToImage: "https://via.placeholder.com/300",
       keyword: "Finance",
       content: "The stock market soared to new highs...",
@@ -30,27 +34,20 @@ const articles = [
   //   }
   // }
   
-  const getArticles = async () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(articles);
-      }, 500);
-    });
-  };
-  
-  const saveArticles = async ({ _id, isSaved, article, savedArticles }) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        if (isSaved) {
-          // Add the article
-          savedArticles = [...savedArticles, article];
-        } else {
-          // Remove the article
-          savedArticles = savedArticles.filter((a) => a._id !== _id);
-        }
-        resolve(savedArticles); // Return updated saved articles
-      }, 500); // Simulate API delay
-    });
-  };
+  const saveArticles = async ({ _id, isSaved, article }) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      if (isSaved) {
+        // Add the article using localStorage function
+        const success = saveArticle(article);
+        resolve(success);
+      } else {
+        // Remove the article using localStorage function
+        const success = removeArticle(article.url);
+        resolve(success);
+      }
+    }, 500); // Keep the delay for consistency
+  });
+};
   
   export { getArticles, saveArticles };

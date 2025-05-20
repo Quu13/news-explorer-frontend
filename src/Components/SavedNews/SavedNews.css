@@ -1,4 +1,4 @@
-.saved-news {
+.saved_news {
     box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 equal columns */
@@ -12,13 +12,13 @@
   }
   
   @media screen and (max-width: 768px) {
-    .saved-news {
+    .saved_news {
       padding: 32px 40px;
     }
   }
   
   @media screen and (max-width: 768px) {
-    .saved-news {
+    .saved_news {
       padding: 24px 16px 12px;
     }
   }

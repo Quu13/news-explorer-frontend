@@ -1,20 +1,51 @@
-import './SearchForm.css'
-import React from 'react';
+import './SearchForm.css';
+import React, { useState } from 'react';
 
+function SearchForm({
+  isLoading,
+  onSearchSubmit,
+  articles,
+  isSearchComplete,
+  isSearchError,
+}) {
+  const [searchQuery, setSearchQuery] = useState('');
 
-function SearchForm() {
+  const handleChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    onSearchSubmit(searchQuery.trim());
+  };
+
   return (
-    <form className="search-form">
-      <input
-        type="text"
-        placeholder="Enter topic"
-        className="search-form__input"
-        required
-      />
-      <button type="submit" className="search-form__button">
-        Search
-      </button>
-    </form>
+    <section className="search-section">
+      <form className="search-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Enter topic"
+          className="search-form__input"
+          value={searchQuery}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit" className="search-form__button" disabled={isLoading}>
+          {isLoading ? 'Searching...' : 'Search'}
+        </button>
+      </form>
+
+      {/* Display error message if search failed */}
+      {isSearchError && (
+        <p className="search-form__error">Something went wrong. Please try again.</p>
+      )}
+
+      {/* Display no results if search completed but returned no articles */}
+      {isSearchComplete && articles.length === 0 && !isSearchError && (
+        <p className="search-form__no-results">No results found.</p>
+      )}
+    </section>
   );
 }
 

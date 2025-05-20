@@ -8,6 +8,7 @@ const RegisterModal = ({
   secondaryBtnText,
   onClose,
   onSubmit,
+  onSecondaryBtnClick,
 }) => {
   const { values, handleChange } = useForm({});
 
@@ -23,22 +24,24 @@ const RegisterModal = ({
     onSubmit({ name, email, password });
     onClose();
   };
+
   return (
     <ModalWithForm
       title={title}
       buttonText={buttonText}
       secondaryBtnText={secondaryBtnText}
       onClose={onClose}
+      onSecondaryBtnClick={onSecondaryBtnClick}
       onSubmit={handleSubmit}
     >
-      <label htmlFor="email" className="modal__label">
+      <label htmlFor="register-email" className="modal__label">
         Email
       </label>
       <input
         className="modal__input"
         type="email"
         name="email"
-        id="email"
+        id="register-email"
         value={values.email || ""}
         onChange={handleChange}
         minLength="2"
@@ -46,14 +49,14 @@ const RegisterModal = ({
         placeholder="Enter email"
       />
 
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="register-password" className="modal__label">
         Password
       </label>
       <input
         className="modal__input"
         type="password"
         name="password"
-        id="password"
+        id="register-password"
         value={values.password || ""}
         onChange={handleChange}
         minLength="2"
@@ -61,14 +64,14 @@ const RegisterModal = ({
         placeholder="Enter password"
       />
 
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="register-name" className="modal__label">
         Name
       </label>
       <input
         className="modal__input"
         type="text"
         name="name"
-        id="name"
+        id="register-name"
         value={values.name || ""}
         onChange={handleChange}
         minLength="2"

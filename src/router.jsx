@@ -6,7 +6,7 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "*", // ← changed from "/" to "*"
     element: <App />,
     children: [
       {
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
         element: <Main />,
       },
       {
-        path: "/saved-news",
+        path: "saved-news", // ← no leading slash
         element: <ProtectedRoute element={<SavedNews />} />,
       },
     ],

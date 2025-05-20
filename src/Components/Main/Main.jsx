@@ -1,8 +1,14 @@
 import React from 'react';
 import './Main.css'; 
-import SearchForm from '../SearchForm/SearchForm'; // adjust path as needed
+import SearchForm from '../SearchForm/SearchForm';
 
-function Main() {
+function Main({
+  isLoading,
+  onSearchSubmit,
+  articles,
+  isSearchComplete,
+  isSearchError,
+}) {
   return (
     <main className="main">
       <section className="hero">
@@ -10,7 +16,13 @@ function Main() {
         <p className="hero__subtitle">
           Find the latest news on any topic and save them in your personal account.
         </p>
-        <SearchForm />
+        <SearchForm
+          isLoading={isLoading}
+          onSearchSubmit={onSearchSubmit}
+          articles={articles}
+          isSearchComplete={isSearchComplete}
+          isSearchError={isSearchError}
+        />
       </section>
     </main>
   );

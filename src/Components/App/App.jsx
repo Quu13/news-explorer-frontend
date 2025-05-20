@@ -1,201 +1,222 @@
-import Header from "../Header/Header";
-// import { NewsContext } from "../../context/NewsContext.jsx";
+import { useCallback, useEffect, useState } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+
+import Footer from "../Footer/Footer.jsx";
+import Header from "../Header/Header.jsx";
+import About from "../About/About.jsx";
+import Main from "../Main/Main.jsx";
+import SavedNews from "../SavedNews/SavedNews.jsx";
+import LoginModal from "../LoginModal/LoginModal.jsx";
+import RegisterModal from "../RegisterModal/RegisterModal.jsx";
+import SuccessModal from "../SuccessModal/SuccessModal.jsx";
+import MobileMenuModal from "../MobileMenuModal/MobileMenuModal.jsx";
+
 import UserContext from "../../context/UserContext.jsx";
-import Footer from "../Footer/Footer";
-import About from "../About/About";
-import Drawer from "../Drawer/Drawer.jsx";
-import LoginModal from "../LoginModal/LoginModal";
-// import RegisterModal from "../RegisterModal/RegisterModal";
-import getNews from "../../utils/newsApi.jsx";
+import ProtectedRoute from "../ProtectedRoute.jsx";
+
+import { signIn, signUp, checkToken } from "../../utils/auth.js";
+
 import "./App.css";
-import { Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { signUp, signIn, checkToken } from "../../utils/auth.jsx";
-import { getArticles, saveArticles } from "../../utils/api.jsx";
 
-const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
-  const [activeModal, setActiveModal] = useState("");
-  const [newsArticles, setNewsArticles] = useState({});
-  const [savedArticles, setSavedArticles] = useState({});
-  const [visibleArticles, setVisableArticles] = useState(0);
+function App() {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
+
   const [isLoading, setIsLoading] = useState(false);
-  const [hasSearched, setHasSearched] = useState(false);
+  const [articles, setArticles] = useState([]);
+  const [isSearchComplete, setIsSearchComplete] = useState(false);
+  const [isSearchError, setIsSearchError] = useState(false);
 
-  const handleSignUp = async (email, password) => {
-    return await signUp();
+  const [savedArticles, setSavedArticles] = useState([
+    { id: 1, keyword: "Politics", title: "Article 1" },
+    { id: 2, keyword: "Economy", title: "Article 2" },
+    { id: 3, keyword: "Politics", title: "Article 3" },
+  ]);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLoginClick = () => setIsLoginModalOpen(true);
+  const handleRegisterClick = () => setIsRegisterModalOpen(true);
+  const handleSuccessClick = () => setIsSuccessModalOpen(true);
+  const handleMobileMenuClick = () => setIsMobileMenuOpen(true);
+  const closeAllModals = () => {
+    setIsLoginModalOpen(false);
+    setIsRegisterModalOpen(false);
+    setIsSuccessModalOpen(false);
+    setIsMobileMenuOpen(false);
   };
 
-  const handleSignIn = async (email, password) => {
-    try {
-      const response = await signIn();
-      if (response.token) {
-        localStorage.setItem("token", response.token);
-        handleCheckToken();
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const handleLoggout = () => {
-    console.log("crash?");
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-    setCurrentUser({});
-    setSavedArticles({});
-  };
-
-  const handleCheckToken = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) return;
-
-      const response = await checkToken(token);
-      if (response.data) {
-        setIsLoggedIn(true);
-        const { name, email, _id } = response.data;
-        setCurrentUser({ name, email, _id });
-        fetchArticles();
-      }
-    } catch (err) {
-      console.error("Error checking token:", err);
-    }
-  };
-
-  const fetchArticles = async () => {
-    const articles = await getArticles();
-    setSavedArticles(articles);
-  };
-
-  const handleSaveArticle = async ({ _id, isSaved, article }) => {
-    try {
-      const updatedArticles = await saveArticles({
-        _id,
-        isSaved,
-        article,
-        savedArticles,
-      });
-      setSavedArticles(updatedArticles);
-    } catch (err) {
-      console.error("Error saving article:", err);
-    }
-  };
-
-  const handleCardRender = () => {
-    if (visibleArticles > newsArticles.length) {
-      setVisableArticles(newsArticles.length);
-    }
-    setVisableArticles((prevCount) => prevCount + 3);
-  };
-
-  const handleSearch = async (keyword) => {
+  const handleSearchSubmit = (query) => {
     setIsLoading(true);
-    try {
-      const articleData = await getNews(keyword);
+    setIsSearchComplete(false);
+    setIsSearchError(false);
 
-      const articleObj = articleData.map((article) => ({
-        _id: crypto.randomUUID(),
-        isSaved: false,
-        ...article,
-        keyword,
-      }));
-
-      if (!hasSearched) {
-        setHasSearched(true);
-      }
-
-      setNewsArticles(articleObj);
-      setVisableArticles(0);
-      handleCardRender();
-    } catch (err) {
-      console.log(err);
-    } finally {
+    setTimeout(() => {
+      const mockResults = [
+        {
+          id: 1,
+          title: "News Article 1",
+          description: "Lorem ipsum dolor sit amet.",
+        },
+        {
+          id: 2,
+          title: "News Article 2",
+          description: "Consectetur adipiscing elit.",
+        },
+      ];
+      setArticles(mockResults);
       setIsLoading(false);
+      setIsSearchComplete(true);
+    }, 1500);
+  };
+
+  const handleLogin = useCallback(
+    async ({ email, password }) => {
+      try {
+        const { token } = await signIn(email, password);
+        localStorage.setItem("jwt", token);
+        const response = await checkToken(token);
+        setCurrentUser(response.data);
+        setLoggedIn(true);
+        closeAllModals();
+        navigate("/saved-news");
+      } catch (err) {
+        console.error("Login error:", err);
+      }
+    },
+    [navigate]
+  );
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+    setCurrentUser({ name: "", email: "" });
+    localStorage.removeItem("jwt");
+    navigate("/");
+  };
+
+  const handleRegisterSubmit = async ({ name, email, password }) => {
+    try {
+      await signUp(name, email, password);
+      closeAllModals();
+      setIsSuccessModalOpen(true);
+    } catch (err) {
+      console.error("Registration error:", err);
     }
-  };
-
-  const handleDrawerOpen = () => {
-    setActiveModal("drawer");
-  };
-
-  const handleOpenLoginModal = () => {
-    setActiveModal("login");
-  };
-
-  const handleOpenRegisterModal = () => {
-    setActiveModal("register");
-  };
-
-  const handleCloseModal = () => {
-    setActiveModal("");
   };
 
   useEffect(() => {
-    handleCheckToken();
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      checkToken(token)
+        .then((response) => {
+          setCurrentUser(response.data);
+          setLoggedIn(true);
+        })
+        .catch((err) => {
+          console.error("Token validation error:", err);
+        });
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") closeAllModals();
+    };
+    document.addEventListener("keydown", handleEscClose);
+    return () => document.removeEventListener("keydown", handleEscClose);
   }, []);
 
   return (
-    <div className="app">
-      <UserContext.Provider value={{ currentUser, isLoggedIn }}>
+    <UserContext.Provider value={{ currentUser, isLoggedIn: loggedIn }}>
+      <div className="app">
         <div className="page">
-          <div className="hero-background">
-            <Header
-              handleOpenLoginModal={handleOpenLoginModal}
-              handleOpenRegisterModal={handleOpenRegisterModal}
-              handleSearch={handleSearch}
-              handleDrawerOpen={handleDrawerOpen}
-              handleOnLoggout={handleLoggout}
-              savedArticles={savedArticles}
+          <Routes location={location} key={location.pathname}>
+            <Route
+              path="/"
+              element={
+                <>
+                  <div className="hero-background">
+                    <Header
+                      onLoginClick={handleLoginClick}
+                      onRegisterClick={handleRegisterClick}
+                      onMobileMenuClick={handleMobileMenuClick}
+                      loggedIn={loggedIn}
+                    />
+                    <Main
+                      isLoading={isLoading}
+                      onSearchSubmit={handleSearchSubmit}
+                      articles={articles}
+                      isSearchComplete={isSearchComplete}
+                      isSearchError={isSearchError}
+                    />
+                  </div>
+                  <About />
+                </>
+              }
             />
-            <Outlet
-              context={{
-                visibleArticles,
-                newsArticles,
-                savedArticles,
-                handleCardRender,
-                isLoading,
-                hasSearched,
-                handleSaveArticle,
-              }}
+            <Route
+              path="/saved-news"
+              element={
+                <ProtectedRoute>
+                  <Header
+                    onLoginClick={handleLoginClick}
+                    onRegisterClick={handleRegisterClick}
+                    onMobileMenuClick={handleMobileMenuClick}
+                    loggedIn={loggedIn}
+                    onLogout={handleLogout}
+                  />
+                  <SavedNews
+                    isLoggedIn={loggedIn}
+                    handleSignOut={handleLogout}
+                    handleDeleteArticle={() => {}}
+                    handleSaveArticle={() => {}}
+                    savedArticles={savedArticles}
+                  />
+                </ProtectedRoute>
+              }
             />
-          </div>
-          <About />
-          <Footer />
-        </div>
+          </Routes>
 
-        {activeModal === "drawer" && (
-          <Drawer
-            handleCloseModal={handleCloseModal}
-            handleOpenLoginModal={handleOpenLoginModal}
-            isLoggedIn={isLoggedIn}
-          />
-        )}
-        {activeModal === "login" && (
+          <Footer />
+
           <LoginModal
-            title="Sign in"
-            buttonText="Sign In"
-            secondaryBtnText="Sign up"
-            onSecondaryBtnClick={handleOpenRegisterModal}
-            onClose={handleCloseModal}
-            onSubmit={handleSignIn}
+            isOpen={isLoginModalOpen}
+            onClose={closeAllModals}
+            onRegisterClick={handleRegisterClick}
+            onSubmit={handleLogin}
           />
-        )}
-        {activeModal === "register" && (
+
           <RegisterModal
-            title="Sign in"
-            buttonText="Sign up"
-            secondaryBtnText="Login in"
-            onSecondaryBtnClick={handleOpenLoginModal}
-            onSubmit={handleSignUp}
-            onClose={handleCloseModal}
+            isOpen={isRegisterModalOpen}
+            onClose={closeAllModals}
+            onSubmit={handleRegisterSubmit}
+            onSuccessClick={handleSuccessClick}
           />
-        )}
-      </UserContext.Provider>
-    </div>
+
+          <SuccessModal
+            isOpen={isSuccessModalOpen}
+            onClose={closeAllModals}
+            onLoginClick={handleLoginClick}
+          />
+
+          <MobileMenuModal
+            isOpen={isMobileMenuOpen}
+            onClose={closeAllModals}
+            onLoginClick={handleLoginClick}
+            onRegisterClick={handleRegisterClick}
+            onLogoutClick={handleLogout}
+            loggedIn={loggedIn}
+          />
+        </div>
+      </div>
+    </UserContext.Provider>
   );
-};
+}
 
 export default App;
-
