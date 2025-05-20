@@ -188,15 +188,31 @@ function App() {
           <LoginModal
             isOpen={isLoginModalOpen}
             onClose={closeAllModals}
-            onRegisterClick={handleRegisterClick}
             onSubmit={handleLogin}
+            buttonText="Sign in"
+            secondaryBtnText="Sign up"
+            onSecondaryBtnClick={() => {
+              closeAllModals();
+              setTimeout(() => {
+                setIsRegisterModalOpen(true);
+              }, 0);
+            }}
+            title="Sign in"
           />
 
           <RegisterModal
             isOpen={isRegisterModalOpen}
             onClose={closeAllModals}
             onSubmit={handleRegisterSubmit}
-            onSuccessClick={handleSuccessClick}
+            title="Sign up"
+            buttonText="Sign up"
+            secondaryBtnText="Sign in"
+            onSecondaryBtnClick={() => {
+              closeAllModals();
+              setTimeout(() => {
+                setIsLoginModalOpen(true);
+              }, 0);
+            }}
           />
 
           <SuccessModal

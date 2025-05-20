@@ -14,7 +14,7 @@ function ModalWithForm({
   onSecondaryBtnClick,
   isDisabled,
   containerClassName,
-  hideDefaultButton
+  hideDefaultButton,
 }) {
   const handleOverlayClick = (e) => {
     if (e.target.classList.contains("modal")) {
@@ -62,7 +62,10 @@ function ModalWithForm({
                 </button>
                 <button
                   type="button"
-                  onClick={onSecondaryBtnClick}
+                  onClick={(e) => {
+                    console.log("Secondary button clicked!"); // Add this line
+                    onSecondaryBtnClick(e);
+                  }}
                   className="modal__secondaryBtn"
                 >
                   or{" "}

@@ -1,12 +1,17 @@
 export const signUp = async (email, password) => {
+  console.log('Email value received in signUp:', email);
   if (!email || !password) {
     return Promise.reject(new Error('Email and password are required'));
   }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return Promise.reject(new Error('Please enter a valid email address'));
-  }
+  if (!email || !email.includes("@")) {
+  return Promise.reject(new Error("Please enter a valid email address"));
+}
+  // Add the info down below back later 
+  // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // if (!emailRegex.test(email)) {
+  //   return Promise.reject(new Error('Please enter a valid email address'));
+  // }
 
   if (password.length < 6) {
     return Promise.reject(new Error('Password must be at least 6 characters long'));

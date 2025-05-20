@@ -17,25 +17,44 @@ const useForm = (initialValues) => {
     return "";
   };
 
+  const validatePassword = (password) => {
+    const trimmedPassword = password.trim();
+    if (!trimmedPassword) return "Password is required";
+    if (trimmedPassword.length < 6)
+      return "Password must be at least 6 characters long";
+    return "";
+  };
+
+  const validateName = (name) => {
+    const trimmedName = name.trim();
+    if (!trimmedName) return "Name is required";
+    if (trimmedName.length < 2)
+      return "Name must be at least 2 characters long";
+    return "";
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const trimmedValue = value.trimStart(); // Optional UX choice
+    const trimmedValue = value.trimStart();
 
     setValues((prev) => ({ ...prev, [name]: trimmedValue }));
 
-    // Validate inputs based on field
+    let errorMsg = "";
     if (name === "email") {
-      const errorMsg = validateEmail(trimmedValue);
-      setErrors((prev) => ({ ...prev, [name]: errorMsg }));
+      errorMsg = validateEmail(trimmedValue);
+    } else if (name === "password") {
+      errorMsg = validatePassword(trimmedValue);
+    } else if (name === "name") {
+      errorMsg = validateName(trimmedValue);
     }
 
-    // Check overall validity
-    setIsValid(
-      Object.values({
-        ...errors,
-        [name]: name === "email" ? validateEmail(trimmedValue) : "",
-      }).every((err) => err === "")
+    const updatedErrors = { ...errors, [name]: errorMsg };
+    setErrors(updatedErrors);
+
+    const formIsValid = Object.values(updatedErrors).every(
+      (err) => err === ""
     );
+    setIsValid(formIsValid);
   };
 
   return {
