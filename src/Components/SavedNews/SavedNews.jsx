@@ -3,7 +3,7 @@ import Navigation from "../Navigation/Navigation";
 import SavedCardsArray from "../SavedCardsArray/SavedCardsArray";
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
 
-import React, { useContext, useMemo } from "react";;
+import React, { useContext, useMemo } from "react";
 import UserContext from "../../context/UserContext";
 
 function SavedNews({
@@ -15,10 +15,9 @@ function SavedNews({
 }) {
   const { currentUser } = useContext(UserContext);
 
-  console.log('SavedNews - savedArticles:', savedArticles); // Add this line
-  console.log('SavedNews - currentUser:', currentUser); // Add this to check user context
+  console.log("SavedNews - savedArticles:", savedArticles);
+  console.log("SavedNews - currentUser:", currentUser);
 
-  // Extract unique keywords from saved articles
   const keywords = useMemo(() => {
     const allKeywords = savedArticles.map((article) => article.keyword);
     const uniqueKeywords = [...new Set(allKeywords)];
@@ -27,7 +26,11 @@ function SavedNews({
 
   return (
     <main className="saved__news">
-      <Navigation isLoggedIn={isLoggedIn} handleSignOut={handleSignOut} />
+      <Navigation
+        isLoggedIn={isLoggedIn}
+        handleSignOut={handleSignOut}
+        currentUser={currentUser}
+      />
       <SavedNewsHeader
         isLoggedIn={isLoggedIn}
         currentUser={currentUser}

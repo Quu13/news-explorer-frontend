@@ -164,20 +164,23 @@ function App() {
               path="/saved-news"
               element={
                 <ProtectedRoute>
-                  <Header
-                    onLoginClick={handleLoginClick}
-                    onRegisterClick={handleRegisterClick}
-                    onMobileMenuClick={handleMobileMenuClick}
-                    loggedIn={loggedIn}
-                    onLogout={handleLogout}
-                  />
-                  <SavedNews
-                    isLoggedIn={loggedIn}
-                    handleSignOut={handleLogout}
-                    handleDeleteArticle={() => {}}
-                    handleSaveArticle={() => {}}
-                    savedArticles={savedArticles}
-                  />
+                  <div className="hero-background">
+                    <Header
+                      onLoginClick={handleLoginClick}
+                      onRegisterClick={handleRegisterClick}
+                      onMobileMenuClick={handleMobileMenuClick}
+                      loggedIn={loggedIn}
+                      onLogout={handleLogout}
+                    />
+                    <SavedNews
+                      isLoggedIn={loggedIn}
+                      handleSignOut={handleLogout}
+                      handleDeleteArticle={() => {}}
+                      handleSaveArticle={() => {}}
+                      savedArticles={savedArticles}
+                    />
+                  </div>
+                  <About />
                 </ProtectedRoute>
               }
             />

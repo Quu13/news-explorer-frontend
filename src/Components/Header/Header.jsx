@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom"; // ✅ Use NavLink from React Router
 import "./Header.css";
 
 function Header({
@@ -11,22 +12,25 @@ function Header({
 }) {
   return (
     <header className="header">
-      <a href="/" className="header__logo">
-        NewsExplorer
-      </a>
+      <span className="header__logo">NewsExplorer</span>
       <nav className="header__nav">
         <div className="header__links">
-          <a href="/" className="header__link">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `header__link${isActive ? " header__link_active" : ""}`
+            }
+          >
             Home
-          </a>
-          {/* Add more links if needed */}
+          </NavLink>
         </div>
+
         <div className="header__buttons">
           <button
             className="header__button"
             onClick={() => {
               console.log("Sign in button clicked!");
-              onLoginClick(); // ✅ matches App.jsx
+              onLoginClick();
             }}
           >
             Sign In

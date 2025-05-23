@@ -13,26 +13,28 @@ function Navigation({
   const location = useLocation();
   const currentPath = location.pathname;
   const isSavedArticlesPage =
-    currentPath === "/saved-articles" ||
+    currentPath === "/saved-news" ||
     currentPath === "/news-explorer/saved-articles";
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="navigation">
+    <nav
+      className={`navigation ${isSavedArticlesPage ? "navigation_saved" : ""}`}
+    >
       <div
         className={`navigation__link-container ${
           isMobileMenuOpen ? "navigation__link-container_menu-opened" : ""
         }`}
       >
-        <Link
-          to="/"
+        <span
           className={`navigation__logo ${
             isSavedArticlesPage ? "navigation__logo-saved" : ""
           }`}
         >
           NewsExplorer
-        </Link>
+        </span>
+
         <button
           className={`navigation__menu-button ${
             isMobileMenuOpen ? "navigation__menu-close-btn" : ""
@@ -45,7 +47,7 @@ function Navigation({
         <div className="navigation__links">
           <NavLink
             to="/"
-            className={(isActive) =>
+            className={({ isActive }) =>
               `navigation__home-link ${
                 isActive ? "navigation__link_active" : ""
               } ${isSavedArticlesPage ? "navigation__home-link-saved" : ""}`
@@ -61,11 +63,12 @@ function Navigation({
               </div>
             )}
           </NavLink>
+
           {isLoggedIn ? (
             <>
               <NavLink
                 to="/saved-articles"
-                className={(isActive) =>
+                className={({ isActive }) =>
                   `navigation__saved-link ${
                     isActive ? "navigation__link_active" : ""
                   } ${

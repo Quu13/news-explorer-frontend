@@ -29,19 +29,6 @@
 }
 
 /* Link group */
-.header__links {
-  display: flex;
-  gap: 24px;
-  font-family: 'Roboto Slab', serif;
-}
-
-/* Button group */
-.header__buttons {
-  display: flex;
-  gap: 24px;
-  font-family: 'Roboto Slab', serif;
-}
-
 .header__link {
   font-size: 16px;
   font-weight: 400;
@@ -50,6 +37,25 @@
   background: none;
   border: none;
   cursor: pointer;
+  position: relative;
+}
+
+.header__link_active::after {
+  content: '';
+  position: absolute;
+  bottom: -29px;  /* Exactly 29px below the text */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 68px;
+  height: 3px;
+  background-color: #FFFFFF;  /* Explicitly setting white color */
+}
+
+/* Button group */
+.header__buttons {
+  display: flex;
+  gap: 24px;
+  font-family: 'Roboto Slab', serif;
 }
 
 .header__button {
