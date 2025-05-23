@@ -4,9 +4,7 @@ import Navigation from "../Navigation/Navigation";
 
 function Header({
   onLoginClick,
-  onRegisterClick, // optional: remove if not needed
   onLogout,
-  onMobileMenuClick, // optional: remove if not needed
   loggedIn,
   currentUser,
   isModalOpen,
