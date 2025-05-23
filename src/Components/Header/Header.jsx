@@ -1,42 +1,25 @@
 import React from "react";
-import { NavLink } from "react-router-dom"; // ✅ Use NavLink from React Router
 import "./Header.css";
+import Navigation from "../Navigation/Navigation";
 
 function Header({
   onLoginClick,
-  onRegisterClick,
-  onMobileMenuClick,
+  onRegisterClick, // optional: remove if not needed
   onLogout,
+  onMobileMenuClick, // optional: remove if not needed
   loggedIn,
-  savedArticles,
+  currentUser,
+  isModalOpen,
 }) {
   return (
     <header className="header">
-      <span className="header__logo">NewsExplorer</span>
-      <nav className="header__nav">
-        <div className="header__links">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              `header__link${isActive ? " header__link_active" : ""}`
-            }
-          >
-            Home
-          </NavLink>
-        </div>
-
-        <div className="header__buttons">
-          <button
-            className="header__button"
-            onClick={() => {
-              console.log("Sign in button clicked!");
-              onLoginClick();
-            }}
-          >
-            Sign In
-          </button>
-        </div>
-      </nav>
+      <Navigation
+        handleSignInClick={onLoginClick}
+        isLoggedIn={loggedIn}
+        handleLogout={onLogout}
+        currentUser={currentUser}
+        isModalOpen={isModalOpen}
+      />
     </header>
   );
 }

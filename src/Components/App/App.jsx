@@ -168,9 +168,15 @@ function App() {
                     <Header
                       onLoginClick={handleLoginClick}
                       onRegisterClick={handleRegisterClick}
-                      onMobileMenuClick={handleMobileMenuClick}
-                      loggedIn={loggedIn}
                       onLogout={handleLogout}
+                      loggedIn={loggedIn}
+                      currentUser={currentUser}
+                      isModalOpen={
+                        isLoginModalOpen ||
+                        isRegisterModalOpen ||
+                        isSuccessModalOpen ||
+                        isMobileMenuOpen
+                      }
                     />
                     <SavedNews
                       isLoggedIn={loggedIn}

@@ -1,5 +1,5 @@
 import "./Navigation.css";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
 import MobileMenuModal from "../MobileMenuModal/MobileMenuModal";
 
@@ -11,10 +11,9 @@ function Navigation({
   isModalOpen,
 }) {
   const location = useLocation();
-  const currentPath = location.pathname;
   const isSavedArticlesPage =
-    currentPath === "/saved-news" ||
-    currentPath === "/news-explorer/saved-articles";
+    location.pathname === "/saved-news" ||
+    location.pathname === "/news-explorer/saved-articles";
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -42,6 +41,7 @@ function Navigation({
             isModalOpen ? "navigation__menu-button-hidden" : ""
           }`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle mobile menu"
         ></button>
 
         <div className="navigation__links">
@@ -96,7 +96,9 @@ function Navigation({
                 {currentUser?.name}
                 <span
                   className={`navigation__logout-icon ${
-                    isSavedArticlesPage ? "navigation__logout-icon-saved" : ""
+                    isSavedArticlesPage
+                      ? "navigation__logout-icon-saved"
+                      : ""
                   }`}
                 ></span>
               </button>
