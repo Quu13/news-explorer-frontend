@@ -81,8 +81,9 @@ function App() {
       try {
         const { token } = await signIn(email, password);
         localStorage.setItem("jwt", token);
-        const response = await checkToken(token);
-        setCurrentUser(response.data);
+        // Set a default user object directly
+        const userData = { name: "Test User", email: email }; // You can modify this as needed
+        setCurrentUser(userData);
         setLoggedIn(true);
         closeAllModals();
         navigate("/saved-news");
@@ -112,17 +113,12 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
-    if (token) {
-      checkToken(token)
-        .then((response) => {
-          setCurrentUser(response.data);
-          setLoggedIn(true);
-        })
-        .catch((err) => {
-          console.error("Token validation error:", err);
-        });
+    if (token && loggedIn) {
+      // Mock the checkToken response
+      const userData = { name: "Test User", email: "user@example.com" };
+      setCurrentUser(userData);
     }
-  }, []);
+  }, [loggedIn]); 
 
   useEffect(() => {
     const handleEscClose = (e) => {
