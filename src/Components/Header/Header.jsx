@@ -4,19 +4,19 @@ import Navigation from "../Navigation/Navigation";
 
 function Header({
   onLoginClick,
+  onRegisterClick,
   onLogout,
-  loggedIn,
-  currentUser,
-  isModalOpen,
+  isMobileMenuOpen,
+  setIsMobileMenuOpen
 }) {
   return (
     <header className="header">
       <Navigation
-        handleSignInClick={onLoginClick}
-        isLoggedIn={loggedIn}
-        handleLogout={onLogout}
-        currentUser={currentUser}
-        isModalOpen={isModalOpen}
+        onLoginClick={onLoginClick}
+        onRegisterClick={onRegisterClick}
+        onLogout={onLogout}
+        isMobileMenuOpen={isMobileMenuOpen}
+        setIsMobileMenuOpen={setIsMobileMenuOpen}
       />
     </header>
   );

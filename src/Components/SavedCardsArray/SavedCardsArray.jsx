@@ -13,7 +13,6 @@ function SavedCardsArray({
         <p className="saved-cards-array__empty">You have no saved articles.</p>
       ) : (
         <ul className="saved-cards-array__list">
-          {console.log("Articles being mapped:", savedArticles)}
           {savedArticles.map((article) => (
             <li key={article.id} className="saved-cards-array__item">
               <NewsCard

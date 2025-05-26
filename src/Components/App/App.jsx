@@ -186,7 +186,6 @@ function App() {
                       savedArticles={savedArticles}
                     />
                   </div>
-                  <About />
                 </ProtectedRoute>
               }
             />

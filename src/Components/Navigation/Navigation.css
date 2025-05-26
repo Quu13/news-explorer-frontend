@@ -47,7 +47,6 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 3px;
   width: 100%;
   background-color: #fff;
 }
@@ -143,7 +142,7 @@
 .navigation__logout-icon {
   width: 24px;
   height: 24px;
-  background: url("../../assets/logout.svg") no-repeat center;
+  background: url("../../assets/logout-white.svg") no-repeat center;
 }
 
 .navigation__logout-icon-saved {
@@ -239,9 +238,24 @@
     font-size: 16px;
   }
 
+  @media screen and (max-width: 550px) {
   .navigation__links {
     display: none;
   }
+
+  .navigation__link-container_menu-opened .navigation__links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background-color: #1a1b22;
+    padding: 16px;
+    z-index: 10;
+  }
+}
 
   .navigation__menu-button {
     display: block;

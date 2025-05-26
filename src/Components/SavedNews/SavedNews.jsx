@@ -1,5 +1,4 @@
 import "./SavedNews.css";
-import Navigation from "../Navigation/Navigation";
 import SavedCardsArray from "../SavedCardsArray/SavedCardsArray";
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
 
@@ -9,7 +8,6 @@ import UserContext from "../../context/UserContext";
 function SavedNews({
   isLoggedIn,
   savedArticles = [],
-  handleSignOut,
   handleDeleteArticle,
   handleSaveArticle,
 }) {
@@ -26,11 +24,6 @@ function SavedNews({
 
   return (
     <main className="saved__news">
-      <Navigation
-        isLoggedIn={isLoggedIn}
-        handleSignOut={handleSignOut}
-        currentUser={currentUser}
-      />
       <SavedNewsHeader
         isLoggedIn={isLoggedIn}
         currentUser={currentUser}

@@ -1,21 +1,22 @@
 import "./Navigation.css";
 import { NavLink, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import MobileMenuModal from "../MobileMenuModal/MobileMenuModal";
+import UserContext from "../../context/UserContext";
 
 function Navigation({
-  handleSignInClick,
-  isLoggedIn,
-  handleLogout,
-  currentUser,
-  isModalOpen,
+  onLoginClick,
+  onRegisterClick,
+  onLogout,
+  isMobileMenuOpen,
+  setIsMobileMenuOpen,
 }) {
   const location = useLocation();
+  const { isLoggedIn, currentUser } = useContext(UserContext);
+
   const isSavedArticlesPage =
     location.pathname === "/saved-news" ||
     location.pathname === "/news-explorer/saved-articles";
-
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <nav
@@ -37,9 +38,7 @@ function Navigation({
         <button
           className={`navigation__menu-button ${
             isMobileMenuOpen ? "navigation__menu-close-btn" : ""
-          } ${isSavedArticlesPage ? "navigation__menu-button-saved" : ""} ${
-            isModalOpen ? "navigation__menu-button-hidden" : ""
-          }`}
+          } ${isSavedArticlesPage ? "navigation__menu-button-saved" : ""}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle mobile menu"
         ></button>
@@ -67,7 +66,7 @@ function Navigation({
           {isLoggedIn ? (
             <>
               <NavLink
-                to="/saved-articles"
+                to="/saved-news"
                 className={({ isActive }) =>
                   `navigation__saved-link ${
                     isActive ? "navigation__link_active" : ""
@@ -91,36 +90,31 @@ function Navigation({
                 className={`navigation__sign-out-btn ${
                   isSavedArticlesPage ? "navigation__sign-out-btn-saved" : ""
                 }`}
-                onClick={handleLogout}
+                onClick={onLogout}
               >
                 {currentUser?.name}
                 <span
                   className={`navigation__logout-icon ${
-                    isSavedArticlesPage
-                      ? "navigation__logout-icon-saved"
-                      : ""
+                    isSavedArticlesPage ? "navigation__logout-icon-saved" : ""
                   }`}
                 ></span>
               </button>
             </>
           ) : (
-            <button
-              className="navigation__sign-in-btn"
-              onClick={handleSignInClick}
-            >
+            <button className="navigation__sign-in-btn" onClick={onLoginClick}>
               Sign in
             </button>
           )}
         </div>
       </div>
-
       <MobileMenuModal
         isOpen={isMobileMenuOpen}
-        isLoggedIn={isLoggedIn}
-        handleSignInClick={handleSignInClick}
-        handleLogout={handleLogout}
-        currentUser={currentUser}
         onClose={() => setIsMobileMenuOpen(false)}
+        onLoginClick={onLoginClick}
+        onRegisterClick={onRegisterClick}
+        onLogoutClick={onLogout} // keep as-is if using consistent naming
+        loggedIn={isLoggedIn}
+        currentUser={currentUser}
       />
     </nav>
   );
