@@ -19,19 +19,19 @@ const LoginModal = ({
   const isDisabled = !isValid;
 
   const handleSubmit = (e) => {
-  e.preventDefault();
-  if (isDisabled) return;
+    e.preventDefault();
+    if (isDisabled) return;
 
-  const { email, password } = values;
-  console.log("Attempting to submit with:", { email, password }); // ✅ Log 1
-  console.log("onSubmit is:", onSubmit); // ✅ Log 2
-  onSubmit({ email, password });
-  onClose();
-};
-
+    const { email, password } = values;
+    console.log("Attempting to submit with:", { email, password }); // ✅ Log 1
+    console.log("onSubmit is:", onSubmit); // ✅ Log 2
+    onSubmit({ email, password });
+    onClose();
+  };
 
   return (
     <ModalWithForm
+      isOpen={isOpen}
       title={title}
       buttonText={buttonText}
       secondaryBtnText={secondaryBtnText}
@@ -39,7 +39,7 @@ const LoginModal = ({
       onClose={onClose}
       onSubmit={handleSubmit}
       isDisabled={isDisabled}
-      isOpen={isOpen} // ✅ passed to ModalWithForm
+      containerClassName="modal__container--login"
     >
       <label className="modal__field" htmlFor="login-email">
         <span className="modal__label">Email</span>
@@ -52,9 +52,7 @@ const LoginModal = ({
           onChange={handleChange}
           placeholder="Enter email"
         />
-        {errors.email && (
-          <span className="modal__error">{errors.email}</span>
-        )}
+        {errors.email && <span className="modal__error">{errors.email}</span>}
       </label>
 
       <label className="modal__field" htmlFor="login-password">

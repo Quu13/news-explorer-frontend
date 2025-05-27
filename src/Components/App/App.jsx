@@ -86,7 +86,6 @@ function App() {
         setCurrentUser(userData);
         setLoggedIn(true);
         closeAllModals();
-        navigate("/saved-news");
       } catch (err) {
         console.error("Login error:", err);
       }
@@ -141,6 +140,7 @@ function App() {
                     <Header
                       onLoginClick={handleLoginClick}
                       onRegisterClick={handleRegisterClick}
+                      onLogout={handleLogout}
                       onMobileMenuClick={handleMobileMenuClick}
                       loggedIn={loggedIn}
                     />

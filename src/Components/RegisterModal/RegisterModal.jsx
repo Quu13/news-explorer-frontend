@@ -44,10 +44,11 @@ const RegisterModal = ({
       onSecondaryBtnClick={onSecondaryBtnClick}
       onSubmit={handleSubmit}
       disabled={!isValid}
+      containerClassName="modal__container--register"
     >
-      <label htmlFor="register-email" className="modallabel">Email</label>
+      <label htmlFor="register-email" className="modal__label">Email</label>
       <input
-        className="modalinput"
+        className="modal__input"
         type="email"
         name="email"
         id="register-email"
@@ -56,11 +57,11 @@ const RegisterModal = ({
         placeholder="Enter email"
         required
       />
-      {errors.email && <span className="form-error">{errors.email}</span>}
+      {errors.email && <span className="">{errors.email}</span>}
 
-      <label htmlFor="register-password" className="modallabel">Password</label>
+      <label htmlFor="register-password" className="modal__label">Password</label>
       <input
-        className="modalinput"
+        className="modal__input modal__input--last"
         type="password"
         name="password"
         id="register-password"
@@ -72,9 +73,9 @@ const RegisterModal = ({
       />
       {errors.password && <span className="form-error">{errors.password}</span>}
 
-      <label htmlFor="register-name" className="modallabel">Name</label>
+      <label htmlFor="register-name" className="modal__label">Name</label>
       <input
-        className="modalinput"
+        className="modal__input"
         type="text"
         name="name"
         id="register-name"
