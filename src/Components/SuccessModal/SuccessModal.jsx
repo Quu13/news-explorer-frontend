@@ -17,7 +17,7 @@ function SuccessModal({ isOpen, onClose, onLoginClick }) {
         hideDefaultButton={true}
         containerClassName="modal__container--success"
       >
-        <button onClick={handleSignInClick} className="modal__button">
+        <button onClick={handleSignInClick} className="modal__secondaryBtn_success">
           Sign in
         </button>
       </ModalWithForm>

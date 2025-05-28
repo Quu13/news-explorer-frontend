@@ -5,8 +5,10 @@ import authorImage from '../../assets/profile.svg';
 function About() {
   return (
     <section className="about">
-      <img src={authorImage} alt="Author" className="about__image" />
-      <div className="about__text">
+      <div className="about__image-container">
+        <img src={authorImage} alt="Author" className="about__image" />
+      </div>
+      <div className="about__info">
         <h2 className="about__title">About the author</h2>
         <p className="about__paragraph">
           This block describes the project author. Here you should indicate your name,

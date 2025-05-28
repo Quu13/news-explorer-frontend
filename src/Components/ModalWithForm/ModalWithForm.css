@@ -22,9 +22,7 @@
   position: relative;
 }
 
-
 .modal__container--register {
-  height: 458px;
   padding-top: 34px;
   padding-bottom: 36px;
 }
@@ -99,7 +97,7 @@
   color: #000;
 }
 
-.modal__input--last{
+.modal__input--last {
   margin-bottom: 39px;
 }
 
@@ -176,33 +174,29 @@
 /* Success Modal Styles */
 .modal__container--success {
   height: 182px;
-  padding: 60px 36px;
+  padding: 43px 36px 51px;
+  color: #000;
 }
 
 .modal__title--success {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 900;
   font-size: 24px;
   line-height: 100%;
   margin-bottom: 14px;
 }
 
-.modal__button {
-  width: 358px;
-  height: 64px;
+.modal__secondaryBtn_success {
+  background: none;
   border: none;
-  border-radius: 100px;
+  font-weight: 400;
   font-family: "Inter", sans-serif;
   font-size: 18px;
-  font-weight: 400;
-  background-color: #2f71e5;
-  color: #fff;
   cursor: pointer;
-  margin-top: 20px;
-}
-
-.modal__button:hover {
-  background-color: #347eff;
+  color: #2f71e5; /* "or" stays black */
+  padding: 0; /* Remove any extra space */
+  text-align: left; /* Ensure it's left-aligned */
+  display: block; /* Prevent inline spacing issues */
 }
 
 @media screen and (max-width: 768px) {
