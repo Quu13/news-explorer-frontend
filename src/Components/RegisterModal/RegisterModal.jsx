@@ -10,7 +10,7 @@ const RegisterModal = ({
   onClose,
   onSubmit,
   onSecondaryBtnClick,
-  errorMessage, // NEW: Backend error message
+  errorMessage, 
 }) => {
   const {
     values,
@@ -19,21 +19,20 @@ const RegisterModal = ({
     errors,
     isValid,
   } = useForm({
-    email: '',
-    password: '',
-    name: ''
+    email: "",
+    password: "",
+    name: "",
   });
 
   const isDisabled = !isValid;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const { name, email, password } = values;
     if (isDisabled) return;
 
+    const { name, email, password } = values;
     onSubmit({ name, email, password });
-    setValues({ email: '', password: '', name: '' }); // Reset form after submission
+    setValues({ email: "", password: "", name: "" });
   };
 
   return (
@@ -76,13 +75,15 @@ const RegisterModal = ({
           required
           minLength={6}
         />
-        {errors.password && <span className="modal__error">{errors.password}</span>}
+        {errors.password && (
+          <span className="modal__error">{errors.password}</span>
+        )}
       </label>
 
       <label htmlFor="register-name" className="modal__field">
         <span className="modal__label">Username</span>
         <input
-          className="modal__input"
+          className="modal__input modal__input--last"
           type="text"
           name="name"
           id="register-name"
@@ -96,7 +97,7 @@ const RegisterModal = ({
         {errors.name && <span className="modal__error">{errors.name}</span>}
       </label>
 
-      {/* Backend error message displayed below the inputs */}
+      {/* Backend error display */}
       {errorMessage && (
         <span className="modal__submit-error">{errorMessage}</span>
       )}
