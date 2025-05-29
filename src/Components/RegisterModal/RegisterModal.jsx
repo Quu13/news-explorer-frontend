@@ -10,6 +10,7 @@ const RegisterModal = ({
   onClose,
   onSubmit,
   onSecondaryBtnClick,
+  errorMessage, // NEW: Backend error message
 }) => {
   const {
     values,
@@ -32,7 +33,6 @@ const RegisterModal = ({
     if (isDisabled) return;
 
     onSubmit({ name, email, password });
-    onClose();
     setValues({ email: '', password: '', name: '' }); // Reset form after submission
   };
 
@@ -80,7 +80,7 @@ const RegisterModal = ({
       </label>
 
       <label htmlFor="register-name" className="modal__field">
-        <span className="modal__label">Name</span>
+        <span className="modal__label">Username</span>
         <input
           className="modal__input"
           type="text"
@@ -95,9 +95,15 @@ const RegisterModal = ({
         />
         {errors.name && <span className="modal__error">{errors.name}</span>}
       </label>
+
+      {/* Backend error message displayed below the inputs */}
+      {errorMessage && (
+        <span className="modal__submit-error">{errorMessage}</span>
+      )}
     </ModalWithForm>
   );
 };
 
 export default RegisterModal;
+
 
