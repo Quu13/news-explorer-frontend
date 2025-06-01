@@ -14,6 +14,7 @@ import MobileMenuModal from "../MobileMenuModal/MobileMenuModal.jsx";
 import UserContext from "../../context/UserContext.jsx";
 import ProtectedRoute from "../ProtectedRoute.jsx";
 
+import getNews from "../../utils/newsApi.js";
 import { signIn, signUp, checkToken } from "../../utils/auth.js";
 
 import "./App.css";
@@ -53,27 +54,26 @@ function App() {
   };
 
   const handleSearchSubmit = (query) => {
+    console.log("Starting search for:", query);
     setIsLoading(true);
     setIsSearchComplete(false);
     setIsSearchError(false);
 
-    setTimeout(() => {
-      const mockResults = [
-        {
-          id: 1,
-          title: "News Article 1",
-          description: "Lorem ipsum dolor sit amet.",
-        },
-        {
-          id: 2,
-          title: "News Article 2",
-          description: "Consectetur adipiscing elit.",
-        },
-      ];
-      setArticles(mockResults);
-      setIsLoading(false);
-      setIsSearchComplete(true);
-    }, 1500);
+    getNews(query)
+      .then((articles) => {
+        console.log("Fetched articles from API:", articles);
+        console.log("Setting isSearchComplete to true");
+        setArticles(articles || []);
+        setIsSearchComplete(true);
+      })
+      .catch((err) => {
+        console.error("Error fetching news:", err);
+        setIsSearchError(true);
+      })
+      .finally(() => {
+        console.log("Setting isLoading to false");
+        setIsLoading(false);
+      });
   };
 
   const handleLogin = useCallback(
@@ -81,8 +81,7 @@ function App() {
       try {
         const { token } = await signIn(email, password);
         localStorage.setItem("jwt", token);
-        // Set a default user object directly
-        const userData = { name: "Test User", email: email }; // You can modify this as needed
+        const userData = { name: "Test User", email: email };
         setCurrentUser(userData);
         setLoggedIn(true);
         closeAllModals();
@@ -113,11 +112,10 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token && loggedIn) {
-      // Mock the checkToken response
       const userData = { name: "Test User", email: "user@example.com" };
       setCurrentUser(userData);
     }
-  }, [loggedIn]); 
+  }, [loggedIn]);
 
   useEffect(() => {
     const handleEscClose = (e) => {
@@ -130,7 +128,7 @@ function App() {
   return (
     <UserContext.Provider value={{ currentUser, isLoggedIn: loggedIn }}>
       <div className="app">
-        <div className="page">
+        <div className="page container">
           <Routes location={location} key={location.pathname}>
             <Route
               path="/"

@@ -11,13 +11,13 @@ function Header({
 }) {
   return (
     <header className="header">
-      <Navigation
-        onLoginClick={onLoginClick}
-        onRegisterClick={onRegisterClick}
-        onLogout={onLogout}
-        isMobileMenuOpen={isMobileMenuOpen}
-        setIsMobileMenuOpen={setIsMobileMenuOpen}
-      />
+        <Navigation
+          onLoginClick={onLoginClick}
+          onRegisterClick={onRegisterClick}
+          onLogout={onLogout}
+          isMobileMenuOpen={isMobileMenuOpen}
+          setIsMobileMenuOpen={setIsMobileMenuOpen}
+        />
     </header>
   );
 }

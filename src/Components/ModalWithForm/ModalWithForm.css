@@ -20,6 +20,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  margin: 0;
 }
 
 .modal__container--register {
@@ -31,6 +32,7 @@
   height: 380px;
   padding-top: 34px;
   padding-bottom: 30px;
+  margin: 0;
 }
 
 .modal__close {
@@ -62,7 +64,7 @@
   font-size: 24px;
   line-height: 100%;
   color: #1a1b22;
-  margin-bottom: 22px;
+  margin: 0 0 22px;
 }
 
 .modal__form {
@@ -71,7 +73,9 @@
 }
 
 .modal__field {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 31px;
 }
 
 .modal__label {
@@ -90,15 +94,10 @@
   border-bottom: 1px solid #ccc;
   background-color: transparent;
   padding: 0 0 10px 0;
-  margin-bottom: 31px; /* space between inputs */
+  margin-bottom: 0; /* space between inputs */
   outline: none;
-  border-bottom-color: #000;
   width: 100%;
   color: #000;
-}
-
-.modal__input--last {
-  margin-bottom: 39px;
 }
 
 .modal__input::placeholder {
@@ -141,7 +140,6 @@
   margin-top: 8px;
 }
 
-
 .modal__submit:hover {
   background-color: #347eff;
 }
@@ -182,7 +180,6 @@
 /* Success Modal Styles */
 .modal__container--success {
   height: 182px;
-  padding: 43px 36px 51px;
   color: #000;
 }
 
@@ -206,6 +203,7 @@
   text-align: left; /* Ensure it's left-aligned */
   display: block; /* Prevent inline spacing issues */
 }
+
 
 @media screen and (max-width: 768px) {
   .modal__close {

@@ -1,5 +1,5 @@
 // src/Components/NewsCard/NewsCard.jsx
-import "./NewsCard.css";
+import './NewsCard.css';
 
 function NewsCard({
   article,

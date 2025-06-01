@@ -36,3 +36,19 @@
   line-height: 1.4;
   max-width: 600px;
 }
+
+.news__card-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.results-section {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 104px;
+  box-sizing: border-box;
+}

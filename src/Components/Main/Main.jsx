@@ -1,6 +1,7 @@
 import React from 'react';
 import './Main.css'; 
 import SearchForm from '../SearchForm/SearchForm';
+import NewsCard from '../NewsCard/NewsCard';
 
 function Main({
   isLoading,
@@ -9,6 +10,12 @@ function Main({
   isSearchComplete,
   isSearchError,
 }) {
+  console.log("Main component props:", { isLoading, articles, isSearchComplete, isSearchError });
+  console.log("First article:", articles[0]);
+  if (isSearchComplete && articles.length > 0) {
+    console.log("About to render", articles.length, "articles");
+  }
+
   return (
     <main className="main">
       <section className="hero">
@@ -24,6 +31,23 @@ function Main({
           isSearchError={isSearchError}
         />
       </section>
+
+      {isSearchComplete && articles.length > 0 && (
+        <section className="results-section">
+          <ul className="news-card-list">
+            {articles.map((article, index) => (
+              <NewsCard
+                key={index}
+                article={article}
+                isSaved={false} // You can update this logic later
+                isSavedNewsPage={false}
+                onSave={() => {}}
+                onDelete={() => {}}
+              />
+            ))}
+          </ul>
+        </section>
+      )}
     </main>
   );
 }
