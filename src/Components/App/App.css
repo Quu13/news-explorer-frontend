@@ -89,11 +89,8 @@
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  height: 576px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
+  padding: 80px 104px; /* or whatever spacing works for your layout */
+  box-sizing: border-box;
 }
 
 .container {

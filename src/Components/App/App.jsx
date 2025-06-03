@@ -5,6 +5,7 @@ import Footer from "../Footer/Footer.jsx";
 import Header from "../Header/Header.jsx";
 import About from "../About/About.jsx";
 import Main from "../Main/Main.jsx";
+import SearchForm from "../SearchForm/SearchForm";
 import SavedNews from "../SavedNews/SavedNews.jsx";
 import LoginModal from "../LoginModal/LoginModal.jsx";
 import RegisterModal from "../RegisterModal/RegisterModal.jsx";
@@ -41,6 +42,7 @@ function App() {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const handleLoginClick = () => setIsLoginModalOpen(true);
   const handleRegisterClick = () => setIsRegisterModalOpen(true);
@@ -54,7 +56,6 @@ function App() {
   };
 
   const handleSearchSubmit = (query) => {
-    console.log("Starting search for:", query);
     setIsLoading(true);
     setIsSearchComplete(false);
     setIsSearchError(false);
@@ -62,7 +63,6 @@ function App() {
     getNews(query)
       .then((articles) => {
         console.log("Fetched articles from API:", articles);
-        console.log("Setting isSearchComplete to true");
         setArticles(articles || []);
         setIsSearchComplete(true);
       })
@@ -71,7 +71,6 @@ function App() {
         setIsSearchError(true);
       })
       .finally(() => {
-        console.log("Setting isLoading to false");
         setIsLoading(false);
       });
   };
@@ -134,6 +133,7 @@ function App() {
               path="/"
               element={
                 <>
+                  {/* Wrap both Header and Hero in background */}
                   <div className="hero-background">
                     <Header
                       onLoginClick={handleLoginClick}
@@ -142,23 +142,41 @@ function App() {
                       onMobileMenuClick={handleMobileMenuClick}
                       loggedIn={loggedIn}
                     />
-                    <Main
-                      isLoading={isLoading}
-                      onSearchSubmit={handleSearchSubmit}
-                      articles={articles}
-                      isSearchComplete={isSearchComplete}
-                      isSearchError={isSearchError}
-                    />
+
+                    <section className="hero">
+                      <h1 className="hero__title">
+                        What&apos;s going on in the world?
+                      </h1>
+                      <p className="hero__subtitle">
+                        Find the latest news on any topic and save them in your
+                        personal account.
+                      </p>
+                      <SearchForm
+                        isLoading={isLoading}
+                        onSearchSubmit={handleSearchSubmit}
+                      />
+                    </section>
                   </div>
+
+                  <Main
+                    isLoading={isLoading}
+                    onSearchSubmit={handleSearchSubmit}
+                    articles={articles}
+                    isSearchComplete={isSearchComplete}
+                    isSearchError={isSearchError}
+                  />
+
                   <About />
                 </>
               }
             />
+
             <Route
               path="/saved-news"
               element={
                 <ProtectedRoute>
-                  <div className="hero-background">
+                  <>
+                    {/* Header directly at top for saved news */}
                     <Header
                       onLoginClick={handleLoginClick}
                       onRegisterClick={handleRegisterClick}
@@ -179,7 +197,7 @@ function App() {
                       handleSaveArticle={() => {}}
                       savedArticles={savedArticles}
                     />
-                  </div>
+                  </>
                 </ProtectedRoute>
               }
             />
