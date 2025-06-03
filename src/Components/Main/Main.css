@@ -70,6 +70,24 @@
   width: 100%;
 }
 
+.show-more {
+  display: block;
+  margin: 40px auto;
+  padding: 12px 24px;
+  background-color: #2f71e5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.show-more:hover {
+  background-color: #1c54b2;
+}
+
+
 /* Optional: spinner center override if needed */
 .circle-preloader {
   display: block;
