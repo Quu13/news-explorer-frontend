@@ -1,4 +1,3 @@
-// src/Components/NewsCard/NewsCard.jsx
 import './NewsCard.css';
 
 function NewsCard({
@@ -8,10 +7,7 @@ function NewsCard({
   onSave,
   onDelete,
 }) {
-  // Add validation check
-  if (!article) {
-    return null;
-  }
+  if (!article) return null;
 
   const {
     title,
@@ -23,34 +19,30 @@ function NewsCard({
     keyword,
   } = article;
 
-  // Add safety checks for required data
-  if (!title || !url) {
-    return null;
-  }
+  if (!title || !url) return null;
 
   const handleSaveClick = () => {
-    if (isSaved) {
-      onDelete(article);
-    } else {
-      onSave(article);
-    }
+    isSaved ? onDelete(article) : onSave(article);
   };
 
-  const handleDeleteClick = () => {
-    onDelete(article);
+  const handleDeleteClick = () => onDelete(article);
+
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
   return (
     <li className="news-card">
       <a className="news-card__link" href={url} target="_blank" rel="noopener noreferrer">
-        <img 
-          className="news-card__image" 
-          src={urlToImage || 'placeholder-image-url'} 
-          alt={title} 
+        <img
+          className="news-card__image"
+          src={urlToImage || '/images/placeholder.jpg'}
+          alt={title}
         />
         <div className="news-card__info">
           <p className="news-card__date">
-            {publishedAt ? new Date(publishedAt).toLocaleDateString() : 'No date'}
+            {publishedAt ? formatDate(publishedAt) : 'No date'}
           </p>
           <h3 className="news-card__title">{title}</h3>
           <p className="news-card__description">{description || 'No description available'}</p>
@@ -70,7 +62,7 @@ function NewsCard({
       ) : (
         <button
           className={`news-card__button ${
-            isSaved ? "news-card__button_type_saved" : "news-card__button_type_save"
+            isSaved ? 'news-card__button_type_saved' : 'news-card__button_type_save'
           }`}
           onClick={handleSaveClick}
           aria-label="Save article"
@@ -81,3 +73,4 @@ function NewsCard({
 }
 
 export default NewsCard;
+

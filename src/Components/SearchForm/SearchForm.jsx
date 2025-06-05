@@ -1,6 +1,5 @@
 import './SearchForm.css';
 import React, { useState } from 'react';
-import Preloader from '../Preloader/Preloader';
 
 function SearchForm({
   isLoading,
@@ -41,9 +40,6 @@ function SearchForm({
             {isLoading ? 'Searching...' : 'Search'}
           </button>
         </form>
-
-        {/* Show Preloader */}
-        {isLoading && <Preloader />}
 
         {/* Display error message if search failed */}
         {isSearchError && (

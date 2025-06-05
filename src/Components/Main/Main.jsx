@@ -6,7 +6,6 @@ import NewsCard from '../NewsCard/NewsCard';
 function Main({ isLoading, onSearchSubmit, articles, isSearchComplete, isSearchError }) {
   const [visibleCount, setVisibleCount] = useState(3);
 
-  // Reset visible articles on a new search
   useEffect(() => {
     setVisibleCount(3);
   }, [articles]);
@@ -17,8 +16,18 @@ function Main({ isLoading, onSearchSubmit, articles, isSearchComplete, isSearchE
 
   const visibleArticles = articles.slice(0, visibleCount);
 
+  // 🚫 Don't render section if nothing searched yet
+  if (!isLoading && !isSearchComplete && !isSearchError) {
+    return null;
+  }
+
   return (
     <section className="search-results">
+      {/* ✅ Title only appears if search is complete or loading */}
+      {(isLoading || isSearchComplete) && (
+        <h2 className="search-results__title">Search results</h2>
+      )}
+
       {isLoading && <Preloader />}
 
       {isSearchError && (
@@ -45,7 +54,7 @@ function Main({ isLoading, onSearchSubmit, articles, isSearchComplete, isSearchE
           </ul>
 
           {visibleCount < articles.length && (
-            <button className="show__more" onClick={handleShowMore}>
+            <button className="show-more" onClick={handleShowMore}>
               Show more
             </button>
           )}
