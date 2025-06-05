@@ -51,6 +51,11 @@
   line-height: 1.5;
   font-weight: 400;
   text-align: left;
+
+   display: -webkit-box;
+  -webkit-line-clamp: 3; /* Change this to however many lines you want */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .news-card__source {
