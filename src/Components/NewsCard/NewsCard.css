@@ -78,15 +78,18 @@
   cursor: pointer;
 }
 
-/* Example button icons — you can update these later */
-.news-card__button_type_save::before {
-  content: "🔖";
+.news-card__button_type_save {
+  background-image: url('../../assets/flag-white.svg');
+  background-color: white;
 }
-.news-card__button_type_saved::before {
-  content: "✅";
+
+.news-card__button_type_save:hover {
+  border: 2px solid #1A1B22;
 }
-.news-card__button_type_delete::before {
-  content: "🗑️";
+
+.news-card__button_type_saved {
+  background-image: url('../../assets/flag-blue.svg');
+  background-color: white;
 }
 
 .news-card__keyword {
@@ -98,4 +101,20 @@
   font-size: 12px;
   font-weight: bold;
   border-radius: 4px;
+}
+
+
+.news-card__signin-message {
+  position: absolute;
+  top: 52px;
+  right: 50px;
+  background-color: white;
+  color: #1a1a1a;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+  white-space: nowrap;
 }
