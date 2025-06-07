@@ -111,14 +111,17 @@
     margin-bottom: 24px;
     max-width: 100%;
   }
+  .search-results{
+    width: 768px;
+  }
 
   .search-results__title {
     font-size: 32px;
-    text-align: center;
+    text-align: left;
   }
 
   .news-card__list {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
   }
 
