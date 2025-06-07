@@ -49,3 +49,29 @@
   background-color: #2A65CC;
 }
 
+@media screen and (max-width: 480px) {
+  .search-form {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px; /* reduce top margin for tighter mobile layout */
+    height: auto;
+    width: 100%;
+  }
+
+  .search-form__input {
+    width: 288px;
+    height: 56px;
+    padding: 0 16px;
+    margin-bottom: 16px; /* 16px gap to button */
+    font-size: 16px;
+  }
+
+  .search-form__button {
+    width: 288px;
+    height: 56px;
+    margin-left: 0;
+    border-radius: 100px;
+    font-size: 16px;
+  }
+}
+

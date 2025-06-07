@@ -17,6 +17,7 @@ import ProtectedRoute from "../ProtectedRoute.jsx";
 
 import getNews from "../../utils/newsApi.js";
 import { signIn, signUp, checkToken } from "../../utils/auth.js";
+import { getArticles, saveArticles } from "../../utils/api.jsx"; 
 
 import "./App.css";
 
@@ -34,11 +35,7 @@ function App() {
   const [isSearchComplete, setIsSearchComplete] = useState(false);
   const [isSearchError, setIsSearchError] = useState(false);
 
-  const [savedArticles, setSavedArticles] = useState([
-    { id: 1, keyword: "Politics", title: "Article 1" },
-    { id: 2, keyword: "Economy", title: "Article 2" },
-    { id: 3, keyword: "Politics", title: "Article 3" },
-  ]);
+  const [savedArticles, setSavedArticles] = useState([]);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -62,7 +59,6 @@ function App() {
 
     getNews(query)
       .then((articles) => {
-        console.log("Fetched articles from API:", articles);
         setArticles(articles || []);
         setIsSearchComplete(true);
       })
@@ -75,26 +71,27 @@ function App() {
       });
   };
 
-  const handleLogin = useCallback(
-    async ({ email, password }) => {
-      try {
-        const { token } = await signIn(email, password);
-        localStorage.setItem("jwt", token);
-        const userData = { name: "Test User", email: email };
-        setCurrentUser(userData);
-        setLoggedIn(true);
-        closeAllModals();
-      } catch (err) {
-        console.error("Login error:", err);
-      }
-    },
-    [navigate]
-  );
+  const handleLogin = useCallback(async ({ email, password }) => {
+    try {
+      const { token } = await signIn(email, password);
+      localStorage.setItem("jwt", token);
+      const userData = { name: "Test User", email };
+      setCurrentUser(userData);
+      setLoggedIn(true);
+      closeAllModals();
+
+      const articles = await getArticles();
+      setSavedArticles(articles);
+    } catch (err) {
+      console.error("Login error:", err);
+    }
+  }, []);
 
   const handleLogout = () => {
     setLoggedIn(false);
     setCurrentUser({ name: "", email: "" });
     localStorage.removeItem("jwt");
+    setSavedArticles([]);
     navigate("/");
   };
 
@@ -108,11 +105,28 @@ function App() {
     }
   };
 
+  const handleDeleteArticle = async (article) => {
+    const updated = await saveArticles({ _id: article._id, isSaved: false, article });
+    if (updated) {
+      setSavedArticles((prev) =>
+        prev.filter((a) => a.url !== article.url)
+      );
+    }
+  };
+
+  const handleSaveArticle = async (article) => {
+    const updated = await saveArticles({ _id: article._id, isSaved: true, article });
+    if (updated) {
+      setSavedArticles((prev) => [...prev, article]);
+    }
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token && loggedIn) {
       const userData = { name: "Test User", email: "user@example.com" };
       setCurrentUser(userData);
+      getArticles().then(setSavedArticles);
     }
   }, [loggedIn]);
 
@@ -133,7 +147,6 @@ function App() {
               path="/"
               element={
                 <>
-                  {/* Wrap both Header and Hero in background */}
                   <div className="hero-background">
                     <Header
                       onLoginClick={handleLoginClick}
@@ -142,7 +155,6 @@ function App() {
                       onMobileMenuClick={handleMobileMenuClick}
                       loggedIn={loggedIn}
                     />
-
                     <section className="hero">
                       <h1 className="hero__title">
                         What&apos;s going on in the world?
@@ -164,6 +176,7 @@ function App() {
                     articles={articles}
                     isSearchComplete={isSearchComplete}
                     isSearchError={isSearchError}
+                    isLoggedIn={loggedIn}
                   />
 
                   <About />
@@ -176,7 +189,6 @@ function App() {
               element={
                 <ProtectedRoute>
                   <>
-                    {/* Header directly at top for saved news */}
                     <Header
                       onLoginClick={handleLoginClick}
                       onRegisterClick={handleRegisterClick}
@@ -193,8 +205,8 @@ function App() {
                     <SavedNews
                       isLoggedIn={loggedIn}
                       handleSignOut={handleLogout}
-                      handleDeleteArticle={() => {}}
-                      handleSaveArticle={() => {}}
+                      handleDeleteArticle={handleDeleteArticle}
+                      handleSaveArticle={handleSaveArticle}
                       savedArticles={savedArticles}
                     />
                   </>

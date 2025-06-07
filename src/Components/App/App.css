@@ -140,8 +140,7 @@
 
 @media (max-width: 480px) {
   body::after {
-    content: "Mobile — ≤480px";
+    content: "Mobile — ≤480px"; /* 🔥 Add this */
     background: #28a745;
   }
 }
-

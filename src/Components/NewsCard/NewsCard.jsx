@@ -5,7 +5,7 @@ function NewsCard({
   article,
   isSaved,
   isSavedNewsPage,
-  isLoggedIn, // ✅ required
+  isLoggedIn,
   onSave,
   onDelete,
 }) {
@@ -25,10 +25,21 @@ function NewsCard({
 
   if (!title || !url) return null;
 
-  const handleSaveClick = () => {
-    if (!isLoggedIn) return; // 🔒 Prevent saving
-    isSaved ? onDelete(article) : onSave(article);
-  };
+const handleSaveClick = () => {
+  console.log("Save clicked! isLoggedIn:", isLoggedIn, "isSaved:", isSaved);
+  if (!isLoggedIn) {
+    console.log("User not logged in, save blocked");
+    return;
+  }
+  if (isSaved) {
+    console.log("Calling onDelete");
+    onDelete(article);
+  } else {
+    console.log("Calling onSave");
+    onSave(article);
+  }
+};
+
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -65,11 +76,11 @@ function NewsCard({
           <button
             className={`news-card__button ${
               isSaved ? 'news-card__button_type_saved' : 'news-card__button_type_save'
-            } ${!isLoggedIn && hovered ? 'news-card__button_hovered' : ''}`}
+            }`}
             onClick={handleSaveClick}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            aria-label="Save article"
+            aria-label={isSaved ? "Unsave article" : "Save article"}
           />
           {!isLoggedIn && hovered && (
             <p className="news-card__signin-message">Sign in to save articles</p>
@@ -81,3 +92,4 @@ function NewsCard({
 }
 
 export default NewsCard;
+

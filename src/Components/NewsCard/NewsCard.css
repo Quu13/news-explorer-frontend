@@ -52,7 +52,7 @@
   font-weight: 400;
   text-align: left;
 
-   display: -webkit-box;
+  display: -webkit-box;
   -webkit-line-clamp: 3; /* Change this to however many lines you want */
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -79,17 +79,36 @@
 }
 
 .news-card__button_type_save {
-  background-image: url('../../assets/flag-white.svg');
-  background-color: white;
+  background: #fff url("../../assets/flag-white.svg") no-repeat center;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .news-card__button_type_save:hover {
-  border: 2px solid #1A1B22;
+  background: #fff url("../../assets/flag-black.svg") no-repeat center;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .news-card__button_type_saved {
-  background-image: url('../../assets/flag-blue.svg');
-  background-color: white;
+  background: #fff url("../../assets/flag-blue.svg") no-repeat center;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .news-card__keyword {
@@ -102,7 +121,6 @@
   font-weight: bold;
   border-radius: 4px;
 }
-
 
 .news-card__signin-message {
   position: absolute;
@@ -117,4 +135,53 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   z-index: 2;
   white-space: nowrap;
+}
+
+@media screen and (max-width: 480px) {
+  .news-card {
+    width: 288px;
+    height: 440px;
+  }
+
+  .news-card__image {
+    width: 288px;
+    height: 196px; /* This height fits well into the total 440px card height */
+  }
+
+  .news-card__title {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .news-card__description {
+    font-size: 14px;
+    line-height: 20px;
+    -webkit-line-clamp: 3;
+  }
+
+  .news-card__date,
+  .news-card__source {
+    font-size: 12px;
+  }
+
+  .news-card__button {
+    width: 24px;
+    height: 24px;
+    top: 12px;
+    right: 12px;
+  }
+
+  .news-card__keyword {
+    font-size: 10px;
+    padding: 2px 6px;
+    top: 12px;
+    left: 12px;
+  }
+
+  .news-card__signin-message {
+    font-size: 12px;
+    top: 44px;
+    right: 16px;
+    padding: 4px 6px;
+  }
 }

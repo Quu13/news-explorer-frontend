@@ -107,12 +107,22 @@ function Navigation({
           )}
         </div>
       </div>
+
+      {/* Mini Button for 320px view */}
+      <button
+        className="navigation__mini-button"
+        onClick={() => alert("Mini button clicked!")}
+        aria-label="Mini button"
+      >
+        Mini
+      </button>
+
       <MobileMenuModal
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
         onLoginClick={onLoginClick}
         onRegisterClick={onRegisterClick}
-        onLogoutClick={onLogout} // keep as-is if using consistent naming
+        onLogoutClick={onLogout}
         loggedIn={isLoggedIn}
         currentUser={currentUser}
       />
