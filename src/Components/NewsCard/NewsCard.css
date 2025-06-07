@@ -111,6 +111,29 @@
   cursor: pointer;
 }
 
+.news-card__button_type_delete{
+    background: #fff url("../../assets/trash-white.svg") no-repeat center;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.news-card__button_type_delete:hover{
+    background: #fff url("../../assets/trash-black.svg") no-repeat center;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+
 .news-card__keyword {
   position: absolute;
   top: 16px;

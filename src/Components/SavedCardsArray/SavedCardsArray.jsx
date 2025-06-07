@@ -14,10 +14,14 @@ function SavedCardsArray({
       ) : (
         <ul className="saved-cards-array__list">
           {savedArticles.map((article) => (
-            <li key={article.id} className="saved-cards-array__item">
+            <li
+              key={article._id || article.url} // ✅ STEP 1 FIX HERE
+              className="saved-cards-array__item"
+            >
               <NewsCard
                 article={article}
                 isSaved={true}
+                isSavedNewsPage={true}
                 isLoggedIn={isLoggedIn}
                 onDelete={handleDeleteArticle}
                 onSave={handleSaveArticle}
@@ -31,3 +35,4 @@ function SavedCardsArray({
 }
 
 export default SavedCardsArray;
+
