@@ -1,5 +1,7 @@
+// src/utils/Api.jsx
 import { saveArticle, removeArticle, getSavedArticles } from './localStorage';
 
+// Initial mock articles for development
 const articles = [
   {
     isSaved: true,
@@ -23,7 +25,12 @@ const articles = [
   },
 ].map((article) => ({ ...article, _id: crypto.randomUUID() }));
 
-// Define getArticles using localStorage
+// 💡 Initialize localStorage with mock data ONCE if empty
+if (!getSavedArticles().length) {
+  localStorage.setItem('news-articles', JSON.stringify(articles));
+}
+
+// Get saved articles (used in /saved-articles)
 const getArticles = async () => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -33,6 +40,7 @@ const getArticles = async () => {
   });
 };
 
+// Save or remove article
 const saveArticles = async ({ _id, isSaved, article }) => {
   return new Promise((resolve) => {
     setTimeout(() => {
