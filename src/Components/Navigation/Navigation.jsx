@@ -1,25 +1,33 @@
-import "./Navigation.css";
+import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { useContext, useState } from "react";
 import MobileMenuModal from "../MobileMenuModal/MobileMenuModal";
-import UserContext from "../../context/UserContext";
+import MiniMenuModal from "../MiniMenuModal/MiniMenuModal";
+import "./Navigation.css";
 
-function Navigation({
-  onLoginClick,
-  onRegisterClick,
-  onLogout,
-  isMobileMenuOpen,
-  setIsMobileMenuOpen,
-}) {
-  const location = useLocation();
-  const { isLoggedIn, currentUser } = useContext(UserContext);
+function Navigation({ onLoginClick, onSignOutClick, isLoggedIn }) {
+  const { pathname } = useLocation();
+  const isSavedArticlesPage = pathname === "/saved-news";
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
 
-  const isSavedArticlesPage =
-    location.pathname === "/saved-news" ||
-    location.pathname === "/news-explorer/saved-articles";
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 480);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const openMiniModal = () => setIsMiniModalOpen(true);
+  const closeMiniModal = () => setIsMiniModalOpen(false);
+
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
-    <nav
+    <header
       className={`navigation ${isSavedArticlesPage ? "navigation_saved" : ""}`}
     >
       <div
@@ -27,6 +35,7 @@ function Navigation({
           isMobileMenuOpen ? "navigation__link-container_menu-opened" : ""
         }`}
       >
+        {/* ✅ NewsExplorer Logo */}
         <span
           className={`navigation__logo ${
             isSavedArticlesPage ? "navigation__logo-saved" : ""
@@ -35,98 +44,91 @@ function Navigation({
           NewsExplorer
         </span>
 
-        <button
-          className={`navigation__menu-button ${
-            isMobileMenuOpen ? "navigation__menu-close-btn" : ""
-          } ${isSavedArticlesPage ? "navigation__menu-button-saved" : ""}`}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle mobile menu"
-        ></button>
-
-        <div className="navigation__links">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              `navigation__home-link ${
-                isActive ? "navigation__link_active" : ""
-              } ${isSavedArticlesPage ? "navigation__home-link-saved" : ""}`
-            }
-          >
-            {({ isActive }) => (
-              <div
-                className={`navigation__link-wrapper ${
-                  isActive ? "navigation__link-wrapper_active" : ""
-                }`}
-              >
-                Home
-              </div>
-            )}
-          </NavLink>
-
-          {isLoggedIn ? (
-            <>
+        {/* ✅ Links */}
+        {!isMobile && (
+          <nav className="navigation__links">
+            <NavLink to="/" className="navigation__home-link">
+              Home
+            </NavLink>
+            {isLoggedIn && (
               <NavLink
                 to="/saved-news"
-                className={({ isActive }) =>
-                  `navigation__saved-link ${
-                    isActive ? "navigation__link_active" : ""
-                  } ${
-                    isSavedArticlesPage ? "navigation__saved-link-saved" : ""
-                  }`
-                }
+                className={`navigation__saved-link ${
+                  isSavedArticlesPage ? "navigation__saved-link-saved" : ""
+                }`}
               >
-                {({ isActive }) => (
-                  <div
-                    className={`navigation__link-wrapper ${
-                      isActive ? "navigation__link-wrapper_saved" : ""
-                    }`}
-                  >
-                    Saved articles
-                  </div>
-                )}
+                Saved articles
               </NavLink>
-
+            )}
+            {!isLoggedIn ? (
+              <button
+                className="navigation__sign-in-btn"
+                onClick={onLoginClick}
+              >
+                Sign in
+              </button>
+            ) : (
               <button
                 className={`navigation__sign-out-btn ${
                   isSavedArticlesPage ? "navigation__sign-out-btn-saved" : ""
                 }`}
-                onClick={onLogout}
+                onClick={onSignOutClick}
               >
-                {currentUser?.name}
+                <span>Sign out</span>
                 <span
                   className={`navigation__logout-icon ${
-                    isSavedArticlesPage ? "navigation__logout-icon-saved" : ""
+                    isSavedArticlesPage
+                      ? "navigation__logout-icon-saved"
+                      : ""
                   }`}
                 ></span>
               </button>
-            </>
-          ) : (
-            <button className="navigation__sign-in-btn" onClick={onLoginClick}>
-              Sign in
-            </button>
-          )}
-        </div>
+            )}
+          </nav>
+        )}
+
+        {/* ✅ Mini Button (≤480px only) */}
+        {isMobile && (
+          <button
+            className="navigation__mini-button"
+            aria-label="Open menu"
+            onClick={openMiniModal}
+          >
+            Menu
+          </button>
+        )}
+
+        {/* ✅ Mobile Menu Button (Hamburger) */}
+        <button
+          className={`navigation__menu-button ${
+            isSavedArticlesPage ? "navigation__menu-button-saved" : ""
+          }`}
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+        ></button>
       </div>
 
-      {/* Mini Button for 320px view */}
-      <button
-        className="navigation__mini-button"
-        onClick={() => alert("Mini button clicked!")}
-        aria-label="Mini button"
-      >
-        Mini
-      </button>
+      {/* ✅ Mobile full menu modal */}
+      {isMobileMenuOpen && (
+        <MobileMenuModal
+          isOpen={isMobileMenuOpen}
+          onClose={closeMobileMenu}
+          onLoginClick={onLoginClick}
+          onSignOutClick={onSignOutClick}
+          isLoggedIn={isLoggedIn}
+          isSavedArticlesPage={isSavedArticlesPage}
+        />
+      )}
 
-      <MobileMenuModal
-        isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
-        onLoginClick={onLoginClick}
-        onRegisterClick={onRegisterClick}
-        onLogoutClick={onLogout}
-        loggedIn={isLoggedIn}
-        currentUser={currentUser}
-      />
-    </nav>
+      {/* ✅ Mini modal only for ≤480px */}
+      {isMiniModalOpen && isMobile && (
+        <MiniMenuModal
+          isOpen={isMiniModalOpen}
+          onClose={closeMiniModal}
+          onLoginClick={onLoginClick}
+        />
+      )}
+    </header>
   );
 }
 

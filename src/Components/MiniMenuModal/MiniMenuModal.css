@@ -1,0 +1,55 @@
+.mini-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(26, 27, 34, 0.9); /* black bg w/ slight transparency */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.mini-modal__content {
+  background-color: #1a1b22;
+  padding: 24px 16px;
+  border-radius: 8px;
+  text-align: center;
+  width: 90%;
+  max-width: 280px;
+  position: relative;
+}
+
+.mini-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  background: url("../../assets/modal-close.svg") no-repeat center;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+}
+
+.mini-modal__link {
+  display: block;
+  margin-bottom: 16px;
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: none;
+  font-family: Roboto, sans-serif;
+}
+
+.mini-modal__signin {
+  width: 100%;
+  padding: 12px;
+  background-color: #2f71e5;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  font-family: Roboto, sans-serif;
+}
