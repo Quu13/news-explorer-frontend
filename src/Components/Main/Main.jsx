@@ -11,9 +11,11 @@ function Main({
   isSearchComplete,
   isSearchError,
   isLoggedIn,
+  savedArticles,
+  handleSaveArticle,
+  handleDeleteArticle,
 }) {
   const [visibleCount, setVisibleCount] = useState(3);
-  const [savedArticles, setSavedArticles] = useState([]);
 
   useEffect(() => {
     setVisibleCount(3);
@@ -21,16 +23,6 @@ function Main({
 
   const handleShowMore = () => {
     setVisibleCount((prevCount) => prevCount + 3);
-  };
-
-  const handleSave = (article) => {
-    setSavedArticles((prev) => [...prev, article]);
-  };
-
-  const handleDelete = (article) => {
-    setSavedArticles((prev) =>
-      prev.filter((a) => a.url !== article.url)
-    );
   };
 
   const visibleArticles = articles.slice(0, visibleCount);
@@ -60,7 +52,7 @@ function Main({
             alt="No results found"
             className="search-results__no-results-image"
           />
-          <p className="search-results__message">Nothing found</p>
+          <p className="search-results__message">No results found.</p>
           <p className="search-results__subtext">
             Sorry, but nothing matched your search terms.
           </p>
@@ -71,9 +63,7 @@ function Main({
         <>
           <ul className="news-card__list">
             {visibleArticles.map((article, index) => {
-              const isSaved = savedArticles.some(
-                (a) => a.url === article.url
-              );
+              const isSaved = savedArticles.some((a) => a.url === article.url);
               return (
                 <NewsCard
                   key={index}
@@ -81,8 +71,8 @@ function Main({
                   isSaved={isSaved}
                   isSavedNewsPage={false}
                   isLoggedIn={isLoggedIn}
-                  onSave={handleSave}
-                  onDelete={handleDelete}
+                  onSave={handleSaveArticle}
+                  onDelete={handleDeleteArticle}
                 />
               );
             })}
@@ -100,4 +90,3 @@ function Main({
 }
 
 export default Main;
-

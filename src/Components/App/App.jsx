@@ -17,7 +17,7 @@ import ProtectedRoute from "../ProtectedRoute.jsx";
 
 import getNews from "../../utils/newsApi.js";
 import { signIn, signUp, checkToken } from "../../utils/auth.js";
-import { getArticles, saveArticles } from "../../utils/api.jsx"; 
+import { getArticles, saveArticles } from "../../utils/api.jsx";
 
 import "./App.css";
 
@@ -106,16 +106,22 @@ function App() {
   };
 
   const handleDeleteArticle = async (article) => {
-    const updated = await saveArticles({ _id: article._id, isSaved: false, article });
+    const updated = await saveArticles({
+      _id: article._id,
+      isSaved: false,
+      article,
+    });
     if (updated) {
-      setSavedArticles((prev) =>
-        prev.filter((a) => a.url !== article.url)
-      );
+      setSavedArticles((prev) => prev.filter((a) => a.url !== article.url));
     }
   };
 
   const handleSaveArticle = async (article) => {
-    const updated = await saveArticles({ _id: article._id, isSaved: true, article });
+    const updated = await saveArticles({
+      _id: article._id,
+      isSaved: true,
+      article,
+    });
     if (updated) {
       setSavedArticles((prev) => [...prev, article]);
     }
@@ -171,12 +177,15 @@ function App() {
                   </div>
 
                   <Main
+                    isLoggedIn={loggedIn}
                     isLoading={isLoading}
                     onSearchSubmit={handleSearchSubmit}
                     articles={articles}
                     isSearchComplete={isSearchComplete}
                     isSearchError={isSearchError}
-                    isLoggedIn={loggedIn}
+                    savedArticles={savedArticles}
+                    handleSaveArticle={handleSaveArticle}
+                    handleDeleteArticle={handleDeleteArticle}
                   />
 
                   <About />
