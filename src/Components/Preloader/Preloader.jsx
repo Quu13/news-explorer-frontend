@@ -1,22 +1,12 @@
-import React from "react";
-import "./Preloader.css";
+import './Preloader.css';
 
-const Preloader = () => {
+function Preloader() {
   return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 20,
-        backgroundColor: "#fff",
-        zIndex: 9999,
-      }}
-    >
-      <div className="preloader-content">
-        <h1>Searching for news</h1>
-        <span className="circle-preloader"></span>
-      </div>
+    <div className="preloader">
+      <div className="circle-preloader"></div>
+      <p className="preloader__text">Searching for news...</p>
     </div>
   );
-};
+}
 
 export default Preloader;

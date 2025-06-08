@@ -63,8 +63,36 @@
   color: red;
 }
 
-.search-results__message.no-results {
+.search-results__no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 60px auto;
+  text-align: center;
+  max-width: 320px;
+}
+
+.search-results__no-results-image {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+  margin-bottom: 24px;
+}
+
+.search-results__message {
+  font-size: 26px;
+  color: #1A1B22;
+  font-family: 'Roboto slab', serif;
+  font-weight: 400;
+}
+
+.search-results__subtext {
+  font-size: 18px;
   color: #999;
+  margin-top: 8px;
+  line-height: 1.4;
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
 }
 
 .news-card__list {

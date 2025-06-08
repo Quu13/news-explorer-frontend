@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Main.css";
 import Preloader from "../Preloader/Preloader";
 import NewsCard from "../NewsCard/NewsCard";
+import noResultsImage from "../../assets/not-found.svg";
 
 function Main({
   isLoading,
@@ -9,7 +10,7 @@ function Main({
   articles,
   isSearchComplete,
   isSearchError,
-  isLoggedIn
+  isLoggedIn,
 }) {
   const [visibleCount, setVisibleCount] = useState(3);
   const [savedArticles, setSavedArticles] = useState([]);
@@ -27,8 +28,8 @@ function Main({
   };
 
   const handleDelete = (article) => {
-    setSavedArticles(
-      (prev) => prev.filter((a) => a.url !== article.url) // compare by URL or another unique field
+    setSavedArticles((prev) =>
+      prev.filter((a) => a.url !== article.url)
     );
   };
 
@@ -53,14 +54,26 @@ function Main({
       )}
 
       {isSearchComplete && articles.length === 0 && !isSearchError && (
-        <p className="search-results__message no-results">No results found.</p>
+        <div className="search-results__no-results">
+          <img
+            src={noResultsImage}
+            alt="No results found"
+            className="search-results__no-results-image"
+          />
+          <p className="search-results__message">Nothing found</p>
+          <p className="search-results__subtext">
+            Sorry, but nothing matched your search terms.
+          </p>
+        </div>
       )}
 
       {isSearchComplete && articles.length > 0 && (
         <>
           <ul className="news-card__list">
             {visibleArticles.map((article, index) => {
-              const isSaved = savedArticles.some((a) => a.url === article.url);
+              const isSaved = savedArticles.some(
+                (a) => a.url === article.url
+              );
               return (
                 <NewsCard
                   key={index}
@@ -87,3 +100,4 @@ function Main({
 }
 
 export default Main;
+
