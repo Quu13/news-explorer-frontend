@@ -20,10 +20,12 @@
 }
 
 .preloader__text {
-  font-size: 16px;
+  font-size: 18px;
   color: #888;
   padding: 80px;
   white-space: nowrap;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
 }
 
 @keyframes spin {
