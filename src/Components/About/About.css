@@ -88,7 +88,7 @@
 }
 
 /* Mobile layout ≤480px */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 550px) {
   .about {
     flex-direction: column;
     align-items: center;

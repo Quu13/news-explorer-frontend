@@ -149,7 +149,7 @@
   }
 
   .news-card__list {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, 288px);
     gap: 16px;
   }
 

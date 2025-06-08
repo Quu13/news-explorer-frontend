@@ -22,7 +22,6 @@ function SearchForm({
 
   return (
     <section className="search-section">
-      <div className="container">
         <form className="search-form" onSubmit={handleSubmit} noValidate>
           <input
             type="text"
@@ -52,7 +51,6 @@ function SearchForm({
         {isSearchComplete && articles.length === 0 && !isSearchError && (
           <p className="search-form__no-results">No results found.</p>
         )}
-      </div>
     </section>
   );
 }
