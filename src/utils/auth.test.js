@@ -62,6 +62,7 @@ describe('Authentication Tests', () => {
 
     test('should return user data with valid token', async () => {
       const mockUser = {
+        
         email: 'test@email.com',
         token: 'valid-token'
       };

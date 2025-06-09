@@ -1,49 +1,64 @@
-.mobileMenuModal {
-  top: 56px;
-  right: 0;
+.mobileMenuModal__overlay {
+  position: fixed;
+  top: 0;
   left: 0;
-  width: 100%;
-  height: 230px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+
+.mobileMenuModal {
   background-color: #1a1b22;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  border-top: 1px solid #d1d2d6;
-  padding: 16px;
-  box-sizing: border-box;
-  visibility: hidden;
+  animation: slideDown 0.3s ease forwards;
 }
 
-.mobileMenuModal_opened {
-  visibility: visible;
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
-.mobileMenuModal__home-link {
+.mobileMenuModal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.mobileMenuModal__logo {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: Roboto, Arial, sans-serif;
+}
+
+.mobileMenuModal__close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.mobileMenuModal__link {
   font-family: Roboto, Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 18px;
-  line-height: 56px;
-  color: #ffffff;
-  text-decoration: none;
-  margin-bottom: 22px;
-}
-
-.mobileMenuModal__home-link-logged-in {
-  line-height: 18px;
-  margin-top: 16px;
-}
-
-.mobileMenuModal__saved-link {
-  font-family: Roboto, Arial, Helvetica, sans-serif;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 18px;
   color: #ffffff;
   text-decoration: none;
   margin-bottom: 22px;
 }
 
 .mobileMenuModal__sign-in-btn,
-.mobileMenuModal__register-btn,
 .mobileMenuModal__sign-out-btn {
   border: 1px solid #ffffff;
   width: 100%;
@@ -55,14 +70,6 @@
   font-size: 18px;
   line-height: 24px;
   text-align: center;
-  vertical-align: middle;
   color: #ffffff;
   cursor: pointer;
-}
-
-.mobileMenuModal__auth-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 16px;
 }

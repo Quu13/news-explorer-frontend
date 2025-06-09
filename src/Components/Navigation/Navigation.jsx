@@ -1,16 +1,23 @@
 import "./Navigation.css";
 import { NavLink, useLocation } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import MobileMenuModal from "../MobileMenuModal/MobileMenuModal";
 import UserContext from "../../context/UserContext";
 
-function Navigation({
-  onLoginClick,
-  onRegisterClick,
-  onLogout,
-  isMobileMenuOpen,
-  setIsMobileMenuOpen,
-}) {
+function Navigation({ onLoginClick, onRegisterClick, onLogout }) {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 550);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 550);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const location = useLocation();
   const { isLoggedIn, currentUser } = useContext(UserContext);
 
@@ -35,13 +42,15 @@ function Navigation({
           NewsExplorer
         </span>
 
-        <button
-          className={`navigation__menu-button ${
-            isMobileMenuOpen ? "navigation__menu-close-btn" : ""
-          } ${isSavedArticlesPage ? "navigation__menu-button-saved" : ""}`}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle mobile menu"
-        ></button>
+        {isMobile && (
+          <button
+            className={`navigation__menu-button ${
+              isMobileMenuOpen ? "navigation__menu-close-btn" : ""
+            } ${isSavedArticlesPage ? "navigation__menu-button-saved" : ""}`}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle mobile menu"
+          ></button>
+        )}
 
         <div className="navigation__links">
           <NavLink
@@ -111,21 +120,23 @@ function Navigation({
       {/* Mini Button for 320px view */}
       <button
         className="navigation__mini-button"
-        onClick={() => alert("Mini button clicked!")}
+        onClick={() => setIsMobileMenuOpen(true)}
         aria-label="Mini button"
       >
         Mini
       </button>
 
-      <MobileMenuModal
-        isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
-        onLoginClick={onLoginClick}
-        onRegisterClick={onRegisterClick}
-        onLogoutClick={onLogout}
-        loggedIn={isLoggedIn}
-        currentUser={currentUser}
-      />
+      {isMobile && (
+        <MobileMenuModal
+          isOpen={isMobileMenuOpen}
+          onClose={() => setIsMobileMenuOpen(false)}
+          onLoginClick={onLoginClick}
+          onRegisterClick={onRegisterClick}
+          onLogoutClick={onLogout}
+          loggedIn={isLoggedIn}
+          currentUser={currentUser}
+        />
+      )}
     </nav>
   );
 }

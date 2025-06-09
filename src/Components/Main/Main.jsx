@@ -33,7 +33,7 @@ function Main({
 
   return (
     <section className="search-results">
-      {(isLoading || isSearchComplete) && (
+      {isSearchComplete && articles.length > 0 && (
         <h2 className="search-results__title">Search results</h2>
       )}
 

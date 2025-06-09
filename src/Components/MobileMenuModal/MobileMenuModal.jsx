@@ -1,5 +1,6 @@
 import "./MobileMenuModal.css";
 import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
 
 function MobileMenuModal({
   isOpen,
@@ -7,43 +8,70 @@ function MobileMenuModal({
   onClose,
   loggedIn,
   onLogoutClick,
-  onRegisterClick,
 }) {
-  return (
-    <div
-      className={`mobileMenuModal ${isOpen ? "mobileMenuModal_opened" : ""}`}
-    >
-      <NavLink
-        to="/"
-        className={`mobileMenuModal__home-link ${
-          loggedIn ? "mobileMenuModal__home-link-logged-in" : ""
-        }`}
-        onClick={onClose}
-      >
-        Home
-      </NavLink>
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
 
-      {loggedIn ? (
-        <>
-          <NavLink
-            to="/saved-articles"
-            className="mobileMenuModal__saved-link"
-            onClick={onClose}
-          >
-            Saved articles
-          </NavLink>
+    if (isOpen) {
+      window.addEventListener("keydown", handleEsc);
+      document.body.style.overflow = "hidden"; // prevent scroll when open
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="mobileMenuModal__overlay" onClick={onClose}>
+      <div
+        className="mobileMenuModal mobileMenuModal_dropdown"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="mobileMenuModal__header">
+          <span className="mobileMenuModal__logo">NewsExplorer</span>
           <button
-            className="mobileMenuModal__sign-out-btn"
-            onClick={() => {
-              onLogoutClick();
-              onClose();
-            }}
+            className="mobileMenuModal__close"
+            onClick={onClose}
+            aria-label="Close menu"
           >
-            LogOut
+            ✕
           </button>
-        </>
-      ) : (
-        <div className="mobileMenuModal__auth-buttons">
+        </div>
+
+        <NavLink to="/" className="mobileMenuModal__link" onClick={onClose}>
+          Home
+        </NavLink>
+
+        {loggedIn ? (
+          <>
+            <NavLink
+              to="/saved-articles"
+              className="mobileMenuModal__link"
+              onClick={onClose}
+            >
+              Saved articles
+            </NavLink>
+            <button
+              className="mobileMenuModal__sign-out-btn"
+              onClick={() => {
+                onLogoutClick();
+                onClose();
+              }}
+            >
+              Log Out
+            </button>
+          </>
+        ) : (
           <button
             className="mobileMenuModal__sign-in-btn"
             onClick={() => {
@@ -53,17 +81,8 @@ function MobileMenuModal({
           >
             Sign in
           </button>
-          <button
-            className="mobileMenuModal__register-btn"
-            onClick={() => {
-              onRegisterClick();
-              onClose();
-            }}
-          >
-            Register
-          </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
