@@ -10,14 +10,17 @@
 }
 
 .saved-news-header__title {
-  font-size: 14px;
-  color: rgba(26, 27, 34, 0.5);
+  font-size: 18px;
+  color: #1A1B2280;
   margin: 0 0 28px;
 }
 
 .saved-news-header__heading {
   font-size: 40px;
   line-height: 46px;
+  font-family: "Roboto Slab", serif;
+  font-weight: 400;
+  color: #1A1B22;
   margin: 0 0 30px;
 }
 
@@ -25,4 +28,11 @@
   font-size: 18px;
   line-height: 24px;
   margin: 0;
+  color: #1A1B22;
+}
+
+.saved-news-header__keywords-bold {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
 }

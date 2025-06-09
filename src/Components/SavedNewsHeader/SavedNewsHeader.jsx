@@ -1,7 +1,6 @@
 import "./SavedNewsHeader.css";
 
 function SavedNewsHeader({ isLoggedIn, currentUser, savedArticlesCount, keywords }) {
-  // Helper to format keywords smartly
   const formatKeywords = () => {
     if (!keywords || keywords.length === 0) return "";
 
@@ -15,12 +14,14 @@ function SavedNewsHeader({ isLoggedIn, currentUser, savedArticlesCount, keywords
     <section className="saved-news-header">
       <div className="saved-news-header__container">
         <p className="saved-news-header__title">Saved articles</p>
+
         <h1 className="saved-news-header__heading">
           {isLoggedIn && currentUser?.name
             ? `${currentUser.name}, you have ${savedArticlesCount} saved article${savedArticlesCount !== 1 ? "s" : ""}`
             : "You have saved articles"}
         </h1>
-        {keywords.length > 0 && (
+
+        {keywords && keywords.length > 0 && (
           <p className="saved-news-header__keywords">
             By keywords:{" "}
             <span className="saved-news-header__keywords-bold">
@@ -34,3 +35,4 @@ function SavedNewsHeader({ isLoggedIn, currentUser, savedArticlesCount, keywords
 }
 
 export default SavedNewsHeader;
+
