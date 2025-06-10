@@ -266,8 +266,10 @@
   .navigation__links {
     display: none;
   }
+  
   .navigation__link-container_menu-opened {
     background-color: #1a1b22;
+    display:none;
   }
 
   .navigation__link-container_menu-opened .navigation__links {

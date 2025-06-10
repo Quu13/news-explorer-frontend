@@ -32,13 +32,17 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
+  position: relative;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ffffff33; 
+  box-sizing: border-box;
 }
 
 .mobileMenuModal__logo {
   color: #fff;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
-  font-family: Roboto, Arial, sans-serif;
+  font-family: "Roboto slab", serif;
 }
 
 .mobileMenuModal__close {
@@ -50,7 +54,7 @@
 }
 
 .mobileMenuModal__link {
-  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 18px;
   color: #ffffff;
@@ -65,7 +69,7 @@
   height: 56px;
   background-color: transparent;
   border-radius: 100px;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;

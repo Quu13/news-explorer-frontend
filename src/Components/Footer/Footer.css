@@ -46,6 +46,17 @@
   transform: scale(1.1);
 }
 
+/* NEW: Containers for layout structure */
+.footer__link-container {
+  display: flex;
+  gap: 40px;
+}
+
+.footer__social-container {
+  display: flex;
+  gap: 24px;
+}
+
 /* Responsive Media Queries */
 
 @media (max-width: 1100px) {
@@ -137,56 +148,52 @@
 @media screen and (max-width: 480px) {
   .footer {
     padding: 24px 16px;
-    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 24px;
     box-sizing: border-box;
-    margin: 0;
   }
 
   .footer__nav {
     display: flex;
-    flex-direction: column;
-    gap: 30px;
+    justify-content: space-between;
+    align-items: flex-start;
     width: 100%;
-    margin: 0;
   }
 
-  .footer__social {
-    width: 100%;
-    margin-bottom: 8px;
-  }
-
-  .footer__media {
-    width: 100%;
+  .footer__link-container {
     display: flex;
-    justify-content: flex-end;
-    gap: 24px;
-    padding: 0;
+    flex-direction: column;
+    gap: 12px;
   }
 
-  .footer__github-icon {
-    margin: 0;
-  }
-
-  .footer__fb-icon {
-    margin: 0;
+  .footer__social-container {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
   }
 
   .footer__text {
-    order: 3;
-    margin: 0;
-    color: #b6bcbf;
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 16px;
     text-align: center;
+    color: #b6bcbf;
     max-width: 288px;
+    margin: 0 auto;
   }
 
   .footer__link {
-    font-size: 18px;
-    line-height: 22px;
-    display: block;
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+  }
+
+  .footer__icon-link {
+    display: inline-block;
+  }
+
+  .footer__icon {
+    width: 24px;
+    height: 24px;
   }
 }
+
