@@ -100,7 +100,7 @@
   padding: 0;
   margin-top: 40px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
   gap: 24px;
   width: 100%;
 }
@@ -120,6 +120,11 @@
   height: 64px;
 }
 
+@media screen and (min-width: 1248px) {
+  .news-card__list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
 /* === Tablet View (768px) === */
 @media screen and (max-width: 768px) {
