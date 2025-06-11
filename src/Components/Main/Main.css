@@ -120,6 +120,7 @@
   height: 64px;
 }
 
+
 /* === Tablet View (768px) === */
 @media screen and (max-width: 768px) {
   .hero {
