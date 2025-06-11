@@ -100,7 +100,7 @@
   padding: 0;
   margin-top: 40px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* force exactly 3 columns */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
   width: 100%;
 }
@@ -120,7 +120,6 @@
   height: 64px;
 }
 
-
 /* === Tablet View (768px) === */
 @media screen and (max-width: 768px) {
   .hero {
@@ -138,8 +137,9 @@
     margin-bottom: 24px;
     max-width: 100%;
   }
+
   .search-results {
-    width: 768px;
+    box-sizing: border-box;
   }
 
   .search-results__title {

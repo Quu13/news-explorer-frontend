@@ -289,6 +289,12 @@
     display: block;
   }
 
+  @media screen and (max-width: 550px) {
+  .navigation__mini-button_black {
+    background-image: url("../../assets/mobile-menu-dark.svg"); /* ← replace with your black version */
+  }
+}
+
   .navigation__link-container {
     padding: 0 16px;
     height: 56px;

@@ -143,6 +143,7 @@
   font-size: 12px;
   font-weight: bold;
   border-radius: 4px;
+  color: black;
 }
 
 .news-card__signin-message {

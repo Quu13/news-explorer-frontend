@@ -17,3 +17,16 @@
   font-size: 18px;
   color: #888;
 }
+
+@media screen and (max-width: 480px) {
+  .saved-cards-array__list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 16px;
+  }
+
+  .saved-cards-array {
+    padding: 24px 0;
+  }
+}
+

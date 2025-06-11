@@ -148,7 +148,7 @@
 @media screen and (max-width: 480px) {
   .footer {
     padding: 24px 16px;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
     gap: 24px;
     box-sizing: border-box;

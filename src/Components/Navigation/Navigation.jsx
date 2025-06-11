@@ -119,7 +119,9 @@ function Navigation({ onLoginClick, onRegisterClick, onLogout }) {
 
       {/* Mini Button for 320px view */}
       <button
-        className="navigation__mini-button"
+        className={`navigation__mini-button ${
+          isSavedArticlesPage ? "navigation__mini-button_black" : ""
+        }`}
         onClick={() => setIsMobileMenuOpen(true)}
         aria-label="Mini button"
       >
