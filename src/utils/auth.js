@@ -17,21 +17,30 @@ export const signIn = async (email, password) => {
     throw new Error("Invalid credentials");
   }
 
+  // Save token for later token checks
+  localStorage.setItem("jwt", storedUser.token);
+
   return Promise.resolve({
     message: "Login successful!",
     user: {
-      name: storedUser.name, // ✅ include name
-      email,
+      name: storedUser.name,
+      email: storedUser.email,
       token: storedUser.token,
     },
   });
 };
 
 export const signUp = async (name, email, password) => {
+  if (!name || !email || !password) {
+    throw new Error("All fields are required");
+  }
+
   const token = `token-${Date.now()}`;
   const userData = { name, email, password, token };
+
   localStorage.setItem("user", JSON.stringify(userData));
-  
+  localStorage.setItem("jwt", token); // Save token for session
+
   return Promise.resolve({
     message: "Registration successful!",
     user: { name, email, token },
@@ -39,13 +48,18 @@ export const signUp = async (name, email, password) => {
 };
 
 export const checkToken = async (token) => {
+  if (!token) {
+    throw new Error("No token provided");
+  }
+
   const userStr = localStorage.getItem("user");
+  if (!userStr) throw new Error("No user found");
+
   const user = JSON.parse(userStr);
 
   if (!user || user.token !== token) {
     throw new Error("Invalid token");
   }
 
-  return Promise.resolve({ data: user }); // ✅ includes name if stored
+  return Promise.resolve(user);
 };
-

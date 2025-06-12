@@ -38,7 +38,6 @@
 /* 🔁 Unified Search Results Section */
 .search-results {
   width: 100%;
-  margin: 0 auto;
   padding: 0 16px 80px; /* left/right and bottom only */
   text-align: center;
   background-color: #f5f5f7;
@@ -100,7 +99,8 @@
   padding: 0;
   margin-top: 40px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(288px, 400px));
+  justify-content: center;
   gap: 24px;
   width: 100%;
 }
@@ -120,11 +120,13 @@
   height: 64px;
 }
 
-@media screen and (min-width: 1248px) {
+/* WIP
+@media screen and (min-width: 640px) and (max-width: 1024px) {
   .news-card__list {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+    justify-content: center;
   }
-}
+} */
 
 /* === Tablet View (768px) === */
 @media screen and (max-width: 768px) {
@@ -154,7 +156,6 @@
   }
 
   .news-card__list {
-    grid-template-columns: repeat(auto-fit, 288px);
     gap: 16px;
   }
 

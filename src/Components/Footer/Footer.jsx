@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import github from "../../assets/github.svg";
 import linkedIn from "../../assets/linkedin.svg";
 import './Footer.css';
@@ -12,7 +13,7 @@ const Footer = () => {
       </p>
       <nav className="footer__nav">
         <div className="footer__link-container">
-          <a href="/" className="footer__link">Home</a>
+          <Link to="/" className="footer__link">Home</Link>
           <a href="https://tripleten.com" target="_blank" className="footer__link">TripleTen</a>
         </div>
         <div className="footer__social-container">

@@ -55,7 +55,7 @@ function MobileMenuModal({
         {loggedIn ? (
           <>
             <NavLink
-              to="/saved-articles"
+              to="/saved-news"
               className="mobileMenuModal__link"
               onClick={onClose}
             >

@@ -72,20 +72,24 @@ function App() {
   };
 
   const handleLogin = useCallback(async ({ email, password }) => {
-    try {
-      const { token } = await signIn(email, password);
-      localStorage.setItem("jwt", token);
-      const userData = { name: "Test User", email };
-      setCurrentUser(userData);
-      setLoggedIn(true);
-      closeAllModals();
+  try {
+    const response = await signIn(email, password);
+    const token = response.user.token;
 
-      const articles = await getArticles();
-      setSavedArticles(articles);
-    } catch (err) {
-      console.error("Login error:", err);
-    }
-  }, []);
+    localStorage.setItem("jwt", token);
+
+    const userData = await checkToken(token);
+    setCurrentUser(userData);
+    setLoggedIn(true);
+    closeAllModals();
+
+    const articles = await getArticles();
+    setSavedArticles(articles);
+  } catch (err) {
+    console.error("Login error:", err);
+  }
+}, []);
+
 
   const handleLogout = () => {
     setLoggedIn(false);
@@ -128,10 +132,24 @@ function App() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token && loggedIn) {
-      const userData = { name: "Test User", email: "user@example.com" };
-      setCurrentUser(userData);
+  const token = localStorage.getItem("jwt");
+  if (token) {
+    checkToken(token)
+      .then((userData) => {
+        setCurrentUser({ name: userData.name, email: userData.email });
+        setLoggedIn(true);
+      })
+      .catch((err) => {
+        console.error("Token check failed:", err);
+        localStorage.removeItem("jwt"); // 🧼 clear invalid token
+        setLoggedIn(false);
+        setCurrentUser(null);
+      });
+  }
+}, []);
+
+  useEffect(() => {
+    if (loggedIn) {
       getArticles().then(setSavedArticles);
     }
   }, [loggedIn]);
