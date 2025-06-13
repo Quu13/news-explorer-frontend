@@ -29,7 +29,6 @@
 }
 
 .modal__container--login {
-  height: 380px;
   padding-top: 34px;
   padding-bottom: 30px;
   margin: 0;
@@ -208,10 +207,9 @@
 @media screen and (max-width: 768px) {
   @media screen and (max-width: 768px) {
     .modal__container {
-      width: 430px;
-      position: absolute;
-      top: 207px;
-      left: 169px;
+      width: 90%; /* instead of fixed px */
+      max-width: 430px; /* optional max width to keep layout sane */
+      position: relative;
       border-radius: 16px;
       padding: 24px 36px;
       box-sizing: border-box;
