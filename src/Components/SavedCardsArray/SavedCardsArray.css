@@ -18,28 +18,16 @@
   color: #888;
 }
 
-/* Tablet View: Allow slightly smaller cards so 2 fit comfortably */
-@media screen and (max-width: 1024px) and (min-width: 600px) {
+/* Tablet View (481px–768px): 2 cards per row with smaller width */
+@media screen and (max-width: 768px) and (min-width: 481px) {
   .saved-cards-array__list {
-    grid-template-columns: repeat(auto-fit, minmax(264px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
     gap: 16px;
-  }
-
-  .saved-cards-array {
-    padding: 32px 0;
-  }
-}
-
-/* Small Tablet View (481px–599px): Tighten gaps */
-@media screen and (max-width: 599px) and (min-width: 481px) {
-  .saved-cards-array__list {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 12px;
     padding: 0 16px;
   }
 
   .saved-cards-array {
-    padding: 24px 0;
+    padding: 28px 0;
   }
 }
 
@@ -55,4 +43,3 @@
     padding: 24px 0;
   }
 }
-

@@ -124,7 +124,6 @@
 @media screen and (max-width: 1024px) and (min-width: 600px) {
   .news-card__list {
     grid-template-columns: repeat(auto-fit, minmax(264px, 1fr));
-    gap: 16px;
   }
 }
 
@@ -157,6 +156,7 @@
 
   .news-card__list {
     gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
   }
 
   .show-more {
