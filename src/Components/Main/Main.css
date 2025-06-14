@@ -120,14 +120,6 @@
   height: 64px;
 }
 
-/* WIP
-@media screen and (min-width: 640px) and (max-width: 1024px) {
-  .news-card__list {
-    grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
-    justify-content: center;
-  }
-} */
-
 /* === Tablet View (768px) === */
 @media screen and (max-width: 768px) {
   .hero {

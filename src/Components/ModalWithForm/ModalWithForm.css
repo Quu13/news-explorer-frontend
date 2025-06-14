@@ -206,8 +206,8 @@
 /* For tablets and smaller screens up to 768px */
 @media screen and (max-width: 768px) {
     .modal__container {
-      width: 90%; /* instead of fixed px */
-      max-width: 430px; /* optional max width to keep layout sane */
+      width: 90%; 
+      max-width: 430px; 
       position: relative;
       border-radius: 16px;
       padding: 24px 36px;
@@ -215,7 +215,7 @@
     }
 
     .modal__title {
-      font-size: 20px;
+      font-size: 24px;
       margin-bottom: 20px;
       text-align: left;
     }
@@ -248,7 +248,7 @@
   }
 
 /* For small phones and very small screens up to 320px */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 320px) {
   .modal__container {
     width: 320px;
     height: 100%;
