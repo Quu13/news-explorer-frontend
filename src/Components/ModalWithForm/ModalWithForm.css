@@ -205,7 +205,6 @@
 
 /* For tablets and smaller screens up to 768px */
 @media screen and (max-width: 768px) {
-  @media screen and (max-width: 768px) {
     .modal__container {
       width: 90%; /* instead of fixed px */
       max-width: 430px; /* optional max width to keep layout sane */
@@ -247,10 +246,9 @@
       margin-left: 4px;
     }
   }
-}
 
 /* For small phones and very small screens up to 320px */
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 480px) {
   .modal__container {
     width: 320px;
     height: 100%;
