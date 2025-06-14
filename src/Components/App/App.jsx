@@ -39,11 +39,9 @@ function App() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const isHomePage = location.pathname === "/";
 
   const handleLoginClick = () => setIsLoginModalOpen(true);
   const handleRegisterClick = () => setIsRegisterModalOpen(true);
-  const handleSuccessClick = () => setIsSuccessModalOpen(true);
   const handleMobileMenuClick = () => setIsMobileMenuOpen(true);
   const closeAllModals = () => {
     setIsLoginModalOpen(false);

@@ -41,7 +41,7 @@ const getArticles = async () => {
 };
 
 // Save or remove article
-const saveArticles = async ({ _id, isSaved, article }) => {
+const saveArticles = async ({ isSaved, article }) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       const success = isSaved

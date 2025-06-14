@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 import { signUp, signIn, checkToken } from './auth';
 
 // Mock localStorage

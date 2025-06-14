@@ -6,7 +6,6 @@ import noResultsImage from "../../assets/not-found.svg";
 
 function Main({
   isLoading,
-  onSearchSubmit,
   articles,
   isSearchComplete,
   isSearchError,

@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { useEscape } from "../../hooks/useEscape";
 import "./ModalWithForm.css";
 
