@@ -120,6 +120,14 @@
   height: 64px;
 }
 
+/*Tablet View (1024px–600px): slightly smaller cards */
+@media screen and (max-width: 1024px) and (min-width: 600px) {
+  .news-card__list {
+    grid-template-columns: repeat(auto-fit, minmax(264px, 1fr));
+    gap: 16px;
+  }
+}
+
 /* === Tablet View (768px) === */
 @media screen and (max-width: 768px) {
   .hero {
@@ -155,6 +163,15 @@
     width: 240px;
     height: 56px;
     font-size: 14px;
+  }
+}
+
+/* Small Tablet View (599px–481px): tighter cards */
+@media screen and (max-width: 599px) and (min-width: 481px) {
+  .news-card__list {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+    padding: 0 16px;
   }
 }
 
@@ -224,11 +241,10 @@
   }
 
   .news-card__list {
-    display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
     margin-top: 40px;
-    padding: 0;
+    padding: 0 16px;
   }
 
   .show-more {

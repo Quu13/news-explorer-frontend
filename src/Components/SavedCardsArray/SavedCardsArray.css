@@ -18,9 +18,24 @@
   color: #888;
 }
 
-@media screen and (max-width: 768px) and (min-width: 481px) {
+/* ✅ Tablet View: Allow slightly smaller cards so 2 fit comfortably */
+@media screen and (max-width: 1024px) and (min-width: 600px) {
   .saved-cards-array__list {
-    gap: 8px; 
+    grid-template-columns: repeat(auto-fit, minmax(264px, 1fr));
+    gap: 16px;
+  }
+
+  .saved-cards-array {
+    padding: 32px 0;
+  }
+}
+
+/* ✅ Small Tablet View (481px–599px): Tighten gaps */
+@media screen and (max-width: 599px) and (min-width: 481px) {
+  .saved-cards-array__list {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+    padding: 0 16px;
   }
 
   .saved-cards-array {
@@ -28,10 +43,16 @@
   }
 }
 
+/* ✅ Mobile View (≤480px): 1 card per row */
 @media screen and (max-width: 480px) {
   .saved-cards-array__list {
+    grid-template-columns: 1fr;
     gap: 16px;
     padding: 0 16px;
+  }
+
+  .saved-cards-array {
+    padding: 24px 0;
   }
 }
 
