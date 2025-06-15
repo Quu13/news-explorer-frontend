@@ -43,6 +43,10 @@
   background-color: #f5f5f7;
 }
 
+.search-results > *:first-child {
+  margin-top: 0;
+}
+
 .search-results__title {
   font-size: 40px;
   font-weight: 400;
@@ -208,7 +212,7 @@
 
   .search-results {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 0;
     padding: 0 16px;
     background-color: #f5f5f7;
     text-align: center;
