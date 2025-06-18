@@ -1,0 +1,45 @@
+.saved-cards-array {
+  padding: 40px 0;
+  background: #F5F6F7;
+}
+
+.saved-cards-array__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.saved-cards-array__empty {
+  text-align: center;
+  font-size: 18px;
+  color: #888;
+}
+
+/* Tablet View (481px–768px): 2 cards per row with smaller width */
+@media screen and (max-width: 768px) and (min-width: 481px) {
+  .saved-cards-array__list {
+    grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+    gap: 16px;
+    padding: 0 16px;
+  }
+
+  .saved-cards-array {
+    padding: 28px 0;
+  }
+}
+
+/* Mobile View (≤480px): 1 card per row */
+@media screen and (max-width: 480px) {
+  .saved-cards-array__list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 16px;
+  }
+
+  .saved-cards-array {
+    padding: 24px 0;
+  }
+}

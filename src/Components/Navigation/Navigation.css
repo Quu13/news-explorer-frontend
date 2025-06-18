@@ -1,0 +1,316 @@
+.navigation {
+  width: 100%;
+  height: 80px;
+  position: relative;
+  border-bottom: 1px solid #d1d2d6;
+}
+
+.navigation_saved {
+  background-color: #ffffff;
+}
+
+.navigation__link-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: 80px;
+  padding: 0 104px;
+  margin: 0 auto;
+}
+
+.navigation__links {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+
+.navigation__link-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  width: 100%;
+}
+
+.navigation__link-wrapper_active {
+  border-bottom: 3px solid #fff;
+  width: 68px;
+}
+
+.navigation__link-wrapper_active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+}
+
+/* For saved articles version (dark text on white bg) */
+.navigation__link-wrapper_saved.navigation__link-wrapper_active::after {
+  background-color: #1a1b22;
+}
+
+.navigation__link-wrapper_saved {
+  border-bottom: 3px solid #1a1b22;
+  width: 178px;
+}
+
+.navigation__logo {
+  font-family: "Roboto Slab", Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #fff;
+  text-decoration: none;
+  margin: 0;
+}
+
+.navigation__logo-saved {
+  color: #1a1b22;
+  text-decoration: none;
+}
+
+.navigation__home-link,
+.navigation__saved-link {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.navigation__home-link {
+  color: #fff;
+}
+
+.navigation__home-link-saved,
+.navigation__saved-link-saved {
+  color: #1a1b22;
+}
+
+.navigation__saved-link {
+  color: #b6bcbf;
+  margin-left: 12px;
+}
+
+.navigation__sign-in-btn {
+  width: 176px;
+  height: 48px;
+  border-radius: 100px;
+  border: 1px solid #fff;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.navigation__sign-out-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 112px;
+  height: 48px;
+  padding: 0 10px 0 19px;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  border: 1px solid #fff;
+  border-radius: 100px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.navigation__sign-out-btn-saved {
+  color: #1a1b22;
+  border-color: #1a1b22;
+}
+
+.navigation__sign-out-btn:hover {
+  opacity: 0.8;
+}
+
+.navigation__logout-icon {
+  width: 24px;
+  height: 24px;
+  background: url("../../assets/logout-white.svg") no-repeat center;
+}
+
+.navigation__logout-icon-saved {
+  background-image: url("../../assets/logout-black.svg");
+}
+
+.navigation__menu-button {
+  display: none;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  background-image: url("../../assets/mobile-menu-icon.svg");
+}
+
+.navigation__menu-close-btn {
+  background-image: url("../../assets/modal-close.svg");
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+}
+
+.navigation__menu-button-saved {
+  background-image: url("../../assets/mobile-menu-icon-dark.svg");
+}
+
+.navigation__menu-button-saved.navigation__menu-close-btn {
+  background-image: url("../../assets/modal-close.png");
+}
+
+.navigation__link-container_menu-opened .navigation__logo-saved {
+  color: #fff;
+}
+
+.navigation__menu-button-hidden {
+  display: none !important;
+}
+
+.navigation__mini-button {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 20px;
+  right: 16px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 100px;
+  background-color: #2f71e5;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+  z-index: 10;
+
+  /* Remove text styling since we'll use image */
+  text-indent: -9999px; /* Hide text visually but keep accessible */
+  overflow: hidden;
+  background-color: transparent;
+  padding: 0;
+  width: 32px; /* Adjust as needed */
+  height: 32px; /* Adjust as needed */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  /* Placeholder image, replace URL as needed */
+  background-image: url("../../assets/mobile-menu.svg");
+}
+
+/* Media Queries */
+@media screen and (max-width: 1100px) {
+  .navigation__link-container {
+    padding: 0 40px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .navigation,
+  .navigation__link-container,
+  .navigation__link-wrapper {
+    height: 66px;
+  }
+
+  .navigation__links {
+    gap: 16px;
+  }
+
+  .navigation__link-wrapper_active {
+    width: 60px;
+  }
+
+  .navigation__link-wrapper_saved {
+    width: 160px;
+  }
+
+  .navigation__sign-in-btn {
+    width: 152px;
+    height: 40px;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .navigation__link-container {
+    padding: 0 20px;
+  }
+
+  .navigation__links {
+    gap: 8px;
+  }
+
+  .navigation__link-wrapper_saved {
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .navigation {
+    height: 56px;
+  }
+
+  .navigation__logo {
+    font-size: 16px;
+  }
+
+  .navigation__links {
+    display: none;
+  }
+  
+  .navigation__link-container_menu-opened {
+    background-color: #1a1b22;
+    display:none;
+  }
+
+  .navigation__link-container_menu-opened .navigation__links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background-color: #1a1b22;
+    padding: 16px;
+    z-index: 10;
+  }
+
+  .navigation__mini-button {
+    display: block;
+  }
+
+  @media screen and (max-width: 550px) {
+  .navigation__mini-button_black {
+    background-image: url("../../assets/mobile-menu-dark.svg"); /* ← replace with your black version */
+  }
+}
+
+  .navigation__link-container {
+    padding: 0 16px;
+    height: 56px;
+  }
+
+  .navigation__mobile-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .navigation__sign-in-btn,
+  .navigation__sign-out-btn {
+    width: 100%;
+    margin: 0;
+    justify-content: center;
+  }
+}

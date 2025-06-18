@@ -1,0 +1,82 @@
+.search-form {
+  margin-top: 80px;
+  display: flex;
+  height: 64px;
+  align-items: center;
+  width: 100%;
+}
+
+.search-form__input {
+  width: 608px;
+  height: 64px;
+  border-radius: 100px;
+  border: 1px solid #d1d2d6;
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 24px;
+  font-family: "Roboto", sans-serif;
+  color: #000;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.search-form__input::placeholder {
+  color: #a9a9a9; /* light gray placeholder */
+}
+
+.search-form__button {
+  width: 168px;
+  height: 64px;
+  margin-left: -60px; /* Creates the overlap */
+  border-radius: 100px;
+  background-color: #2f71e5;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* optional for subtle lift */
+}
+
+.search-form__button:hover {
+  background-color: #347eff;
+}
+
+.search-form__button:active {
+  background-color: #2a65cc;
+}
+
+@media screen and (max-width: 768px) {
+  .search-section {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .search-form {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px; /* reduce top margin for tighter mobile layout */
+    height: auto;
+    width: 100%;
+  }
+
+  .search-form__input {
+    width: 288px;
+    height: 56px;
+    padding: 0 16px;
+    margin-bottom: 16px; /* 16px gap to button */
+    font-size: 16px;
+  }
+
+  .search-form__button {
+    width: 288px;
+    height: 56px;
+    margin-left: 0;
+    border-radius: 100px;
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,83 @@
+.drawer {
+    display: none;
+    max-width: 320px;
+    width: 100%;
+    position: fixed;
+    top: -100;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .drawer__container {
+    width: 100%;
+    height: 230px;
+    background-color: #1a1b22;
+    animation: slide-from-top .2s ease-in;
+    padding: 0 16px 24px 16px;
+  }
+  
+  .drawer__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+  }
+  
+  .drawer__logo {
+    font-family: "Roboto Slab";
+    font-weight: 700px;
+    font-size: 16px;
+    line-height: 24px;
+    color: #fff;
+  }
+  
+  .drawer__close-btn {
+    height: 24px;
+    width: 24px;
+    /* background-image: url(../../assets/close.svg); */
+    background-repeat: no-repeat;
+    background-position: top;
+  }
+  
+  .drawer__links {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .drawer__link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    font-family: "Roboto";
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 56px;
+    text-align: left;
+    color: #fff;
+  }
+  
+  .drawer__link-pill-btn {
+    width: 288px;
+    height: 56px;
+    border-radius: 100px;
+    border: solid 1px #fff;
+    margin: 22px auto 0;
+  }
+  
+  @keyframes slide-from-top {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  @media screen and (max-width: 320px) {
+    .drawer {
+      display: flex;
+    }
+  }

@@ -1,0 +1,79 @@
+.mobileMenuModal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+
+.mobileMenuModal {
+  background-color: #1a1b22;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  animation: slideDown 0.3s ease forwards;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.mobileMenuModal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  position: relative;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ffffff33; 
+  box-sizing: border-box;
+}
+
+.mobileMenuModal__logo {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: "Roboto slab", serif;
+}
+
+.mobileMenuModal__close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.mobileMenuModal__link {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: #ffffff;
+  text-decoration: none;
+  margin-bottom: 22px;
+}
+
+.mobileMenuModal__sign-in-btn,
+.mobileMenuModal__sign-out-btn {
+  border: 1px solid #ffffff;
+  width: 100%;
+  height: 56px;
+  background-color: transparent;
+  border-radius: 100px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  color: #ffffff;
+  cursor: pointer;
+}
