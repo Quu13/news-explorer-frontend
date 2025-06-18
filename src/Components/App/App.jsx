@@ -70,24 +70,23 @@ function App() {
   };
 
   const handleLogin = useCallback(async ({ email, password }) => {
-  try {
-    const response = await signIn(email, password);
-    const token = response.user.token;
+    try {
+      const response = await signIn(email, password);
+      const token = response.user.token;
 
-    localStorage.setItem("jwt", token);
+      localStorage.setItem("jwt", token);
 
-    const userData = await checkToken(token);
-    setCurrentUser(userData);
-    setLoggedIn(true);
-    closeAllModals();
+      const userData = await checkToken(token);
+      setCurrentUser(userData);
+      setLoggedIn(true);
+      closeAllModals();
 
-    const articles = await getArticles();
-    setSavedArticles(articles);
-  } catch (err) {
-    console.error("Login error:", err);
-  }
-}, []);
-
+      const articles = await getArticles();
+      setSavedArticles(articles);
+    } catch (err) {
+      console.error("Login error:", err);
+    }
+  }, []);
 
   const handleLogout = () => {
     setLoggedIn(false);
@@ -130,21 +129,21 @@ function App() {
   };
 
   useEffect(() => {
-  const token = localStorage.getItem("jwt");
-  if (token) {
-    checkToken(token)
-      .then((userData) => {
-        setCurrentUser({ name: userData.name, email: userData.email });
-        setLoggedIn(true);
-      })
-      .catch((err) => {
-        console.error("Token check failed:", err);
-        localStorage.removeItem("jwt"); // 🧼 clear invalid token
-        setLoggedIn(false);
-        setCurrentUser(null);
-      });
-  }
-}, []);
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      checkToken(token)
+        .then((userData) => {
+          setCurrentUser({ name: userData.name, email: userData.email });
+          setLoggedIn(true);
+        })
+        .catch((err) => {
+          console.error("Token check failed:", err);
+          localStorage.removeItem("jwt");
+          setLoggedIn(false);
+          setCurrentUser(null);
+        });
+    }
+  }, []);
 
   useEffect(() => {
     if (loggedIn) {
@@ -169,7 +168,7 @@ function App() {
               path="/"
               element={
                 <>
-                  <div className="hero-background">
+                  <header className="hero-background">
                     <Header
                       onLoginClick={handleLoginClick}
                       onRegisterClick={handleRegisterClick}
@@ -190,21 +189,22 @@ function App() {
                         onSearchSubmit={handleSearchSubmit}
                       />
                     </section>
-                  </div>
+                  </header>
 
-                  <Main
-                    isLoggedIn={loggedIn}
-                    isLoading={isLoading}
-                    onSearchSubmit={handleSearchSubmit}
-                    articles={articles}
-                    isSearchComplete={isSearchComplete}
-                    isSearchError={isSearchError}
-                    savedArticles={savedArticles}
-                    handleSaveArticle={handleSaveArticle}
-                    handleDeleteArticle={handleDeleteArticle}
-                  />
-
-                  <About />
+                  <main>
+                    <Main
+                      isLoggedIn={loggedIn}
+                      isLoading={isLoading}
+                      onSearchSubmit={handleSearchSubmit}
+                      articles={articles}
+                      isSearchComplete={isSearchComplete}
+                      isSearchError={isSearchError}
+                      savedArticles={savedArticles}
+                      handleSaveArticle={handleSaveArticle}
+                      handleDeleteArticle={handleDeleteArticle}
+                    />
+                    <About />
+                  </main>
                 </>
               }
             />
@@ -293,3 +293,4 @@ function App() {
 }
 
 export default App;
+
